@@ -14,6 +14,7 @@ namespace RentACar.Models
         [Display(Name = "Денови на изнајмување")]
         public int denoviIznajmuvanje { get; set; }
 
+        // comment
         [Display(Name = "Успешност на резервацијата")]
         public Boolean uspesnost { get; set; }
         [Display(Name = "Платено/Неплатено")]
