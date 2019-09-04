@@ -1,20 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace RentACar.Models
 {
     public class Rezervacija
     {
+        public Rezervacija()
+        {
+            total = 0;
+            uspesnost = false;
+            plateno = false;
+        }
+
         [Key]
-        public int RezervacijaId { get; set;}
+        public int RezervacijaId { get; set; }
         [Required(ErrorMessage = "Деновите на изнајмување на возилото  се задолжителни")]
         [Display(Name = "Денови на изнајмување")]
         public int denoviIznajmuvanje { get; set; }
 
-        // comment
+        //koment
         [Display(Name = "Успешност на резервацијата")]
         public Boolean uspesnost { get; set; }
         [Display(Name = "Платено/Неплатено")]
@@ -28,18 +32,27 @@ namespace RentACar.Models
         public int KorisnikId { get; set; }
         public Korisnik Korisnik { get; set; }
 
-        public Rezervacija()
+        public DateTime DateFrom { get; set; }
+        public DateTime DateTo { get; set; }
+
+        //ova e primer kako mojsh da iskoristis geter vo kontroler 
+        //za bilo kakva rabota i najdobro e vo modelot da nema logika nikakva vo konstruktor
+        //najprakticno e da se prat vakvi geteri vo HomeController ima primer za upotreba na 
+        //geterov
+        public double Total
         {
-            total = 0;
-            uspesnost = false;
-            plateno = false;
+            get
+            {
+                // ako rezervacijata zapochnala vchera
+                if (DateFrom > DateTime.Now.AddDays(-1))
+                {
+                    return total + 1;
+                }
+
+
+                // ako ne vrati go total
+                return total;
+            }
         }
-
-
-
-
-
-
-
     }
 }
