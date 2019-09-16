@@ -32,6 +32,7 @@ namespace RentACar.Models
         public int KorisnikId { get; set; }
         public Korisnik Korisnik { get; set; }
 
+        
         public DateTime DateFrom { get; set; }
         public DateTime DateTo { get; set; }
 
