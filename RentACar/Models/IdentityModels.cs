@@ -20,6 +20,14 @@ namespace RentACar.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Komentar> Komentari { get; set; }
+        public DbSet<Kategorija> Kategorii { get; set; }
+        public DbSet<Proizvoditel> Proizvoditeli { get; set; }
+        public DbSet<Vozilo> Vozila { get; set; }
+        public DbSet<Sopstvenik> Sopstvenici { get; set; }
+        public DbSet<Rezervacija> Rezervacii { get; set; }
+        public DbSet<Korisnik> Korisnici { get; set; }
+        
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
@@ -29,5 +37,7 @@ namespace RentACar.Models
         {
             return new ApplicationDbContext();
         }
+
+       
     }
 }

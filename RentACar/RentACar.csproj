@@ -173,6 +173,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909161929073_promenaModeli.cs" />
+    <Compile Include="Migrations\201909161929073_promenaModeli.Designer.cs">
+      <DependentUpon>201909161929073_promenaModeli.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909161937249_updateDbContext.cs" />
+    <Compile Include="Migrations\201909161937249_updateDbContext.Designer.cs">
+      <DependentUpon>201909161937249_updateDbContext.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Kategorija.cs" />
@@ -258,6 +267,14 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201909161929073_promenaModeli.resx">
+      <DependentUpon>201909161929073_promenaModeli.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909161937249_updateDbContext.resx">
+      <DependentUpon>201909161937249_updateDbContext.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
