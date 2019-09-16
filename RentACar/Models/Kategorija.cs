@@ -14,7 +14,9 @@ namespace RentACar.Models
         [StringLength(20,ErrorMessage = "Максималната големина на името треба да е 20 карактери")]       
         [Display(Name ="Име на категоријата")]
         public string Name { get; set; }
-   
+
+
+        [Display(Name = "Тип")]
         [RegularExpression(@"(B|C|D)",ErrorMessage ="Внеси категорија од тип B,C или D")]
         public string Type { get; set; }
 

@@ -169,7 +169,14 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KategorijasController.cs" />
+    <Compile Include="Controllers\KomentarsController.cs" />
+    <Compile Include="Controllers\KorisniksController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProizvoditelsController.cs" />
+    <Compile Include="Controllers\RezervacijasController.cs" />
+    <Compile Include="Controllers\SopstveniksController.cs" />
+    <Compile Include="Controllers\VoziloesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -251,6 +258,41 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Kategorijas\Create.cshtml" />
+    <Content Include="Views\Kategorijas\Delete.cshtml" />
+    <Content Include="Views\Kategorijas\Details.cshtml" />
+    <Content Include="Views\Kategorijas\Edit.cshtml" />
+    <Content Include="Views\Kategorijas\Index.cshtml" />
+    <Content Include="Views\Voziloes\Create.cshtml" />
+    <Content Include="Views\Voziloes\Delete.cshtml" />
+    <Content Include="Views\Voziloes\Details.cshtml" />
+    <Content Include="Views\Voziloes\Edit.cshtml" />
+    <Content Include="Views\Voziloes\Index.cshtml" />
+    <Content Include="Views\Proizvoditels\Create.cshtml" />
+    <Content Include="Views\Proizvoditels\Delete.cshtml" />
+    <Content Include="Views\Proizvoditels\Details.cshtml" />
+    <Content Include="Views\Proizvoditels\Edit.cshtml" />
+    <Content Include="Views\Proizvoditels\Index.cshtml" />
+    <Content Include="Views\Sopstveniks\Create.cshtml" />
+    <Content Include="Views\Sopstveniks\Delete.cshtml" />
+    <Content Include="Views\Sopstveniks\Details.cshtml" />
+    <Content Include="Views\Sopstveniks\Edit.cshtml" />
+    <Content Include="Views\Sopstveniks\Index.cshtml" />
+    <Content Include="Views\Rezervacijas\Create.cshtml" />
+    <Content Include="Views\Rezervacijas\Delete.cshtml" />
+    <Content Include="Views\Rezervacijas\Details.cshtml" />
+    <Content Include="Views\Rezervacijas\Edit.cshtml" />
+    <Content Include="Views\Rezervacijas\Index.cshtml" />
+    <Content Include="Views\Komentars\Create.cshtml" />
+    <Content Include="Views\Komentars\Delete.cshtml" />
+    <Content Include="Views\Komentars\Details.cshtml" />
+    <Content Include="Views\Komentars\Edit.cshtml" />
+    <Content Include="Views\Komentars\Index.cshtml" />
+    <Content Include="Views\Korisniks\Create.cshtml" />
+    <Content Include="Views\Korisniks\Delete.cshtml" />
+    <Content Include="Views\Korisniks\Details.cshtml" />
+    <Content Include="Views\Korisniks\Edit.cshtml" />
+    <Content Include="Views\Korisniks\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

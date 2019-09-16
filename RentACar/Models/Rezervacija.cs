@@ -32,8 +32,9 @@ namespace RentACar.Models
         public int KorisnikId { get; set; }
         public Korisnik Korisnik { get; set; }
 
-        
+        [Display(Name = "ДатумОд")]
         public DateTime DateFrom { get; set; }
+        [Display(Name = "ДатумДо")]
         public DateTime DateTo { get; set; }
 
         //ova e primer kako mojsh da iskoristis geter vo kontroler 

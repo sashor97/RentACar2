@@ -16,6 +16,7 @@ namespace RentACar.Models
         public string Description { get; set; }
         [Required(ErrorMessage = "Рејтингот е задолжителен")]
         [Range(1, 10, ErrorMessage = "Максимален рејтинг е 10")]
+        [Display(Name = "Рејтинг")]
         public double Rating { get; set; }
 
         public int VoziloId { get; set; }

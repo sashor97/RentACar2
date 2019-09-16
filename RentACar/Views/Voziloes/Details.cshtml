@@ -1,0 +1,74 @@
+﻿@model RentACar.Models.Vozilo
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Vozilo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Kategorija.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Kategorija.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Proizvoditel.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Proizvoditel.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sopstvenik.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sopstvenik.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModelName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModelName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImageUrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImageUrl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Location)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Location)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PriceDay)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PriceDay)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.VoziloId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

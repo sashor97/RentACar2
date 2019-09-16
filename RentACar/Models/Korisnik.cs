@@ -28,6 +28,7 @@ namespace RentACar.Models
         public string Address { get; set; }
 
         [Required(ErrorMessage = "Годините се задолжителни")]
+        [Display(Name = "Години")]
         [Range(18, 99, ErrorMessage = "Корисникот треба да биде полнолетен")]
         public int Age { get; set; }
 
