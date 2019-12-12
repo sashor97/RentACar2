@@ -10,22 +10,23 @@ namespace RentACar.Models
     {
         [Key]
         public int SopstvenikId { get; set; }
+
         [Required(ErrorMessage = "Името е задолжително")]
         [StringLength(12, ErrorMessage = "Максималната големина на името треба да е 12 карактери")]
-        
         [Display(Name = "Име на Сопственик")]
         public string Name { get; set; }
+
         [Required(ErrorMessage = "Презимето е задолжително")]
         [StringLength(20, ErrorMessage = "Максималната големина на презимето треба да е 20 карактери")]
-
         [Display(Name = "Презиме на Сопственик")]
         public string LastName { get; set; }
 
-        [Required(ErrorMessage = "Адресата е задолжителна")]
 
-        [RegularExpression(@"^[a-zA-Z]{2,20} \d{1,4}$", ErrorMessage = "ИмеАдреса број е правилниот формат кој треба да го внесете")]
+        [Required(ErrorMessage = "Адресата е задолжителна")]
+        //[RegularExpression(@"^[a-zA-Z]{2,20} \d{1,4}$", ErrorMessage = "ИмеАдреса број е правилниот формат кој треба да го внесете")]
         [Display(Name = "Адреса на сопственикот")]
         public string Address { get; set; }
+
 
         [Display(Name = "Години")]
         [Required(ErrorMessage = "Годините се задолжителни")]

@@ -15,13 +15,16 @@ namespace RentACar.Models
         [StringLength(12, ErrorMessage = "Максималната големина на името моделот треба да е 12 карактери")]
         [Display(Name = "Име на Моделот")]
         public string ModelName { get; set; }
+
         [Required(ErrorMessage = "Сликата е задолжителна")]
         [Display(Name = "Слика од возилото")]
         public string ImageUrl { get; set; }
+
         [Required(ErrorMessage = "Локацијата е задолжителна")]
         [StringLength(20, ErrorMessage = "Максималната големина на името локацијата треба да е 20 карактери")]
         [Display(Name = "Локација на возилото")]
         public string Location { get; set; }
+
         [Required(ErrorMessage = "Цената по ден за возилото е задолжителна")]
         [Display(Name = "Цена по ден")]
         public double PriceDay { get; set; }
