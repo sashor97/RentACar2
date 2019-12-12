@@ -21,8 +21,10 @@ namespace RentACar.Models
         //koment
         [Display(Name = "Успешност на резервацијата")]
         public Boolean uspesnost { get; set; }
+
         [Display(Name = "Платено/Неплатено")]
         public Boolean plateno { get; set; }
+
         [Display(Name = "Вкупна цена за плаќање")]
         public double total { get; set; }
 

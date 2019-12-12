@@ -10,6 +10,7 @@ namespace RentACar.Models
     {
         [Key]
         public int KategorijaId { get; set; }
+
         [Required(ErrorMessage = "Името е задолжително")]
         [StringLength(20,ErrorMessage = "Максималната големина на името треба да е 20 карактери")]       
         [Display(Name ="Име на категоријата")]

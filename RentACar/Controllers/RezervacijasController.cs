@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using RentACar.Models;
 
 namespace RentACar.Controllers
@@ -13,11 +14,10 @@ namespace RentACar.Controllers
     public class RezervacijasController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-        //jvbrlknvjrkdbnfbndfkjnbkj
+
         // GET: Rezervacijas
         public ActionResult Index()
         {
-            var a = null;
             var rezervacii = db.Rezervacii.Include(r => r.Korisnik).Include(r => r.Vozilo);
             return View(rezervacii.ToList());
         }
@@ -40,8 +40,19 @@ namespace RentACar.Controllers
         // GET: Rezervacijas/Create
         public ActionResult Create()
         {
-            ViewBag.KorisnikId = new SelectList(db.Korisnici, "KorisnikId", "Name");
+
+            //ViewBag.KorisnikId = new SelectList(db.Korisnici, "KorisnikId", "Name");
+            string email = User.Identity.GetUserName();
+
+            var Korisnici = db.Korisnici.Where(k => k.email == email);
+            var count = db.Korisnici.Where(k => k.email == email).Count();
+            if (count == 0)
+            {
+                return RedirectToAction("Create", "Korisniks");
+            }
+            ViewBag.KorisnikId = new SelectList(Korisnici, "KorisnikId", "Name");
             ViewBag.VoziloId = new SelectList(db.Vozila, "VoziloId", "ModelName");
+
             return View();
         }
 

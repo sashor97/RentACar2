@@ -188,8 +188,17 @@
     <Compile Include="Migrations\201909161937249_updateDbContext.Designer.cs">
       <DependentUpon>201909161937249_updateDbContext.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912112130431_change.cs" />
+    <Compile Include="Migrations\201912112130431_change.Designer.cs">
+      <DependentUpon>201912112130431_change.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912112307450_changeKorisnik.cs" />
+    <Compile Include="Migrations\201912112307450_changeKorisnik.Designer.cs">
+      <DependentUpon>201912112307450_changeKorisnik.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AddToRoleModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Kategorija.cs" />
     <Compile Include="Models\Komentar.cs" />
@@ -278,16 +287,17 @@
     <Content Include="Views\Sopstveniks\Details.cshtml" />
     <Content Include="Views\Sopstveniks\Edit.cshtml" />
     <Content Include="Views\Sopstveniks\Index.cshtml" />
-    <Content Include="Views\Rezervacijas\Create.cshtml" />
-    <Content Include="Views\Rezervacijas\Delete.cshtml" />
-    <Content Include="Views\Rezervacijas\Details.cshtml" />
-    <Content Include="Views\Rezervacijas\Edit.cshtml" />
-    <Content Include="Views\Rezervacijas\Index.cshtml" />
     <Content Include="Views\Komentars\Create.cshtml" />
     <Content Include="Views\Komentars\Delete.cshtml" />
     <Content Include="Views\Komentars\Details.cshtml" />
     <Content Include="Views\Komentars\Edit.cshtml" />
     <Content Include="Views\Komentars\Index.cshtml" />
+    <Content Include="Views\Account\AddUserToRole.cshtml" />
+    <Content Include="Views\Rezervacijas\Create.cshtml" />
+    <Content Include="Views\Rezervacijas\Delete.cshtml" />
+    <Content Include="Views\Rezervacijas\Details.cshtml" />
+    <Content Include="Views\Rezervacijas\Edit.cshtml" />
+    <Content Include="Views\Rezervacijas\Index.cshtml" />
     <Content Include="Views\Korisniks\Create.cshtml" />
     <Content Include="Views\Korisniks\Delete.cshtml" />
     <Content Include="Views\Korisniks\Details.cshtml" />
@@ -316,6 +326,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201909161937249_updateDbContext.resx">
       <DependentUpon>201909161937249_updateDbContext.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912112130431_change.resx">
+      <DependentUpon>201912112130431_change.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912112307450_changeKorisnik.resx">
+      <DependentUpon>201912112307450_changeKorisnik.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

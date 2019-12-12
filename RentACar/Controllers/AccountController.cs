@@ -22,6 +22,40 @@ namespace RentACar.Controllers
         {
         }
 
+        public ActionResult AddUserToRole()
+        {
+            AddToRoleModel model = new AddToRoleModel();
+
+            foreach (var u in UserManager.Users)
+            {
+                model.users.Add(u.Email);
+            }
+
+            model.roles.Add("Administrator");
+            model.roles.Add("User");
+           
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult AddUserToRole(AddToRoleModel model)
+        {
+            try
+            {
+                var user = UserManager.FindByEmail(model.UserEmail);
+                UserManager.AddToRole(user.Id, model.Role);
+                return RedirectToAction("Index", "Voziloes");
+            }
+
+            catch (Exception ex)
+            {
+                return HttpNotFound();
+            }
+
+        }
+
+
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
         {
             UserManager = userManager;
@@ -163,7 +197,7 @@ namespace RentACar.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Voziloes");
                 }
                 AddErrors(result);
             }
@@ -392,7 +426,7 @@ namespace RentACar.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Voziloes");
         }
 
         //

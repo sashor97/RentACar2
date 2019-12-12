@@ -10,10 +10,12 @@ namespace RentACar.Models
     {
         [Key]
         public int SopstvenikId { get; set; }
+
         [Required(ErrorMessage = "Коментарот е задолжителен")]
         [StringLength(15, ErrorMessage = "Максималната големина на описот треба да е 15 карактери")]
         [Display(Name = "Опис на коментарот")]
         public string Description { get; set; }
+
         [Required(ErrorMessage = "Рејтингот е задолжителен")]
         [Range(1, 10, ErrorMessage = "Максимален рејтинг е 10")]
         [Display(Name = "Рејтинг")]
@@ -24,11 +26,6 @@ namespace RentACar.Models
 
         public int KorisnikId { get; set; }
         public Korisnik Korisnik { get; set; }
-
-
-
-
-
 
     }
 }
