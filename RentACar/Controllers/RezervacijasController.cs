@@ -13,10 +13,11 @@ namespace RentACar.Controllers
     public class RezervacijasController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
+        //jvbrlknvjrkdbnfbndfkjnbkj
         // GET: Rezervacijas
         public ActionResult Index()
         {
+            var a = null;
             var rezervacii = db.Rezervacii.Include(r => r.Korisnik).Include(r => r.Vozilo);
             return View(rezervacii.ToList());
         }
