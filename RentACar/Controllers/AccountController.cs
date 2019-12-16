@@ -33,7 +33,8 @@ namespace RentACar.Controllers
 
             model.roles.Add("Administrator");
             model.roles.Add("User");
-           
+            model.roles.Add("Owner");
+
 
             return View(model);
         }

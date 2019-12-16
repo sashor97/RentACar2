@@ -33,12 +33,14 @@
         <th>
             @Html.DisplayNameFor(model => model.PriceDay)
         </th>
+        
+        
         <th>
             
         </th>
-        <th>
-            Коментари
-        </th>
+        
+        
+
     </tr>
 
 @foreach (var item in Model) {
@@ -65,11 +67,14 @@
         <td>
             @Html.DisplayFor(modelItem => item.PriceDay)
         </td>
+
+
         <td>
             @Html.ActionLink("Edit", "Edit", new { id = item.VoziloId }) |
             @Html.ActionLink("Details", "Details", new { id = item.VoziloId }) |
             @Html.ActionLink("Delete", "Delete", new { id = item.VoziloId })
         </td>
+        
     </tr>
 }
 

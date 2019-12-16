@@ -55,6 +55,21 @@
         </dd>
     </dl>
 </div>
+
+
+<h2>Comments</h2>
+<div>
+    
+        @foreach (var k in Model.Komentari)
+        {
+            <div>
+                <span>Opis: @k.Description</span> <br/>
+                <span>Rejting: @k.Rating</span> <br/><br/>
+            </div>
+        }
+    
+</div>
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.VoziloId }) |
     @Html.ActionLink("Back to List", "Index")
