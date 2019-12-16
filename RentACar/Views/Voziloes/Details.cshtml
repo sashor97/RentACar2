@@ -57,17 +57,22 @@
 </div>
 
 
-<h2>Comments</h2>
+@Html.ActionLink("Резервирај", "CreateForVozilo", "Rezervacijas", new { id = Model.VoziloId }, new { })
+
+
+<a href=""><h3>Додај коментар</h3></a>
+
+<h4>Коментари</h4>
 <div>
-    
-        @foreach (var k in Model.Komentari)
-        {
-            <div>
-                <span>Opis: @k.Description</span> <br/>
-                <span>Rejting: @k.Rating</span> <br/><br/>
-            </div>
-        }
-    
+
+    @foreach (var k in Model.Komentari)
+    {
+        <div>
+            <span>Opis: @k.Description</span> <br />
+            <span>Rejting: @k.Rating</span> <br /><br />
+        </div>
+    }
+
 </div>
 
 <p>

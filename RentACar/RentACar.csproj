@@ -198,6 +198,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AddReservation.cs" />
     <Compile Include="Models\AddToRoleModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Kategorija.cs" />
@@ -303,6 +304,7 @@
     <Content Include="Views\Korisniks\Details.cshtml" />
     <Content Include="Views\Korisniks\Edit.cshtml" />
     <Content Include="Views\Korisniks\Index.cshtml" />
+    <Content Include="Views\Rezervacijas\CreateForVozilo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

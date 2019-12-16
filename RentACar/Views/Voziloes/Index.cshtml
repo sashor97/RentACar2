@@ -36,7 +36,11 @@
         
         
         <th>
-            
+            Админ
+        </th>
+
+        <th>
+            Резервирај
         </th>
         
         
@@ -73,6 +77,10 @@
             @Html.ActionLink("Edit", "Edit", new { id = item.VoziloId }) |
             @Html.ActionLink("Details", "Details", new { id = item.VoziloId }) |
             @Html.ActionLink("Delete", "Delete", new { id = item.VoziloId })
+        </td>
+
+        <td>
+            @Html.ActionLink("Резервирај", "CreateForVozilo", "Rezervacijas", new { id = item.VoziloId }, new { })
         </td>
         
     </tr>
