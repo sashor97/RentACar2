@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using RentACar.Models;
 
 namespace RentACar.Controllers
@@ -35,9 +36,51 @@ namespace RentACar.Controllers
             }
             return View(komentar);
         }
+        public ActionResult DodadiKomentarZaVozilo(int id)
+        {
 
-        // GET: Komentars/Create
-        public ActionResult Create()
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            //ViewBag.KorisnikId = new SelectList(db.Korisnici, "KorisnikId", "Name");
+            
+            var Vozilo = db.Vozila.Where(k =>k.VoziloId== id).First();
+            if(Vozilo==null)
+            {
+                return HttpNotFound();
+            }
+            List<int> ids = new List<int>();
+            ids.Add(id);
+
+
+            ViewBag.VoziloId = new SelectList(ids);
+            ViewBag.VoziloName = Vozilo.ModelName;
+
+
+
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DodadiKomentarZaVozilo(AddComment model)
+        {
+            Komentar komentar = new Komentar();
+            komentar.VoziloId = model.VoziloId;
+            komentar.Rating = model.Rating;
+            komentar.Description = model.Description;
+            string email = User.Identity.GetUserName();
+            var korisnici = db.Korisnici.Where(k => k.email == email).First();
+           komentar.KorisnikId = korisnici.KorisnikId;
+
+            db.Komentari.Add(komentar);
+            db.SaveChanges();
+            return RedirectToAction("Details","Voziloes", new { id = model.VoziloId});
+        }
+
+            // GET: Komentars/Create
+            public ActionResult Create()
         {
             ViewBag.KorisnikId = new SelectList(db.Korisnici, "KorisnikId", "Name");
             ViewBag.VoziloId = new SelectList(db.Vozila, "VoziloId", "ModelName");

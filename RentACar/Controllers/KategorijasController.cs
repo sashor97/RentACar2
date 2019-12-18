@@ -34,6 +34,19 @@ namespace RentACar.Controllers
             }
             return View(kategorija);
         }
+        public ActionResult PrikaziVozilaKategorija(int ?id)
+        {
+            if(id==null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Kategorija kategorija = db.Kategorii.Find(id);
+            if(kategorija==null)
+            {
+                return HttpNotFound();
+            }
+            return View(kategorija);
+        }
 
         // GET: Kategorijas/Create
         public ActionResult Create()
