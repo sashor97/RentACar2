@@ -54,9 +54,9 @@ namespace RentACar
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "2181375208826085",
+               appSecret: "56b9523a677b7dfa4f85fce8b3d04534");
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{
