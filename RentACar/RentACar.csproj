@@ -306,6 +306,7 @@
     <Content Include="Views\Korisniks\Edit.cshtml" />
     <Content Include="Views\Korisniks\Index.cshtml" />
     <Content Include="Views\Rezervacijas\CreateForVozilo.cshtml" />
+    <Content Include="Views\Kategorijas\PrikaziVozilaKategorija.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -3,19 +3,17 @@
     ViewBag.Title = "PrikaziVozilaKategorija";
 }
 
-<h2>Vozila za kategorijata @Model.Name  se:</h2>
+<h2>Возила што припаѓаат на категорија <b>@Model.Name</b> се:</h2>
 
 <table>
-@foreach (var item in Model.Vozila)
-{
-    <tr>
-        <td>
-            <a href="VoziloesController/Details/@item.VoziloId">@item.ModelName</a>
-        </td>
-       
-    </tr>
-}
+    @foreach (var item in Model.Vozila)
+    {
+        <tr>
+            <td>
+                <a href="/Voziloes/Details/@item.VoziloId"><h4>@item.ModelName</h4></a>
+            </td>
+
+        </tr>
+    }
 
 </table>
-
-

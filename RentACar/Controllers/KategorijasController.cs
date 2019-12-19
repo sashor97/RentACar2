@@ -40,11 +40,14 @@ namespace RentACar.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Kategorija kategorija = db.Kategorii.Find(id);
+            Kategorija kategorija = db.Kategorii.Include(k => k.Vozila).Where(k => k.KategorijaId == id).First();
             if(kategorija==null)
             {
                 return HttpNotFound();
             }
+
+            var vozila = kategorija.Vozila;
+
             return View(kategorija);
         }
 
