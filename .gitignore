@@ -3,3 +3,15 @@
 ################################################################################
 
 /.vs
+/packages/Antlr.3.5.0.2/lib
+/packages/bootstrap.3.3.7
+/packages/EntityFramework.6.2.0
+/packages/jQuery.3.3.1
+/packages/jQuery.Validation.1.17.0
+/packages/Microsoft.AspNet.Identity.Core.2.2.2
+/packages/Microsoft.AspNet.Identity.EntityFramework.2.2.2
+/packages/Microsoft.AspNet.Identity.Owin.2.2.2
+/packages/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0
+/packages/Microsoft.AspNet.WebPages.3.2.4
+/packages/Microsoft.jQuery.Unobtrusive.Validation.3.2.4
+/packages
