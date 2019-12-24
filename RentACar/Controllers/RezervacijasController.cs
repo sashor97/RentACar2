@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using Microsoft.AspNet.Identity;
 using RentACar.Models;
 
@@ -18,8 +19,48 @@ namespace RentACar.Controllers
         // GET: Rezervacijas
         public ActionResult Index()
         {
+            /*
+            string role = Roles.GetRolesForUser()[0];
+            
+            if (role == "Administrator")
+            {
+                var rezervacii = db.Rezervacii.Include(r => r.Korisnik).Include(r => r.Vozilo);
+                return View(rezervacii.ToList());
+            }
+            else // site koi ne se administrator a treba USER ???
+            {
+                string email = User.Identity.GetUserName();
+
+                var Korisnici = db.Korisnici.Where(k => k.email == email);
+                var count = db.Korisnici.Where(k => k.email == email).Count();
+                if (count == 0)
+                {
+                    return RedirectToAction("Create", "Korisniks");
+                }
+
+
+                var korisnik = db.Korisnici.Where(k => k.email == email).First();
+                var rezervacii = db.Rezervacii.Include(r => r.Korisnik).Include(r => r.Vozilo).Where (k => k.KorisnikId == korisnik.KorisnikId;
+                return View(rezervacii.ToList());
+            } */
+
             var rezervacii = db.Rezervacii.Include(r => r.Korisnik).Include(r => r.Vozilo);
+
+            string email = User.Identity.GetUserName();
+            var Korisnici = db.Korisnici.Where(k => k.email == email);
+            var count = db.Korisnici.Where(k => k.email == email).Count();
+            if (count == 0)
+            {
+                return RedirectToAction("Create", "Korisniks");
+            }
+
+            var korisnik = db.Korisnici.Where(k => k.email == email).First();
+            ViewBag.KorisnikId = korisnik.KorisnikId;
+
             return View(rezervacii.ToList());
+
+
+
         }
 
         // GET: Rezervacijas/CreateForVozilo/1
@@ -46,6 +87,7 @@ namespace RentACar.Controllers
 
             
             ViewBag.VoziloId = new SelectList(ids);
+            ViewBag.Poraka = "";
 
             return View();
         }
@@ -98,6 +140,7 @@ namespace RentACar.Controllers
 
 
                     ViewBag.VoziloId = new SelectList(ids);
+                    ViewBag.Poraka = "Veke postoi rezervacija za vneseniot termin";
 
                     return View();
                 }
@@ -112,6 +155,7 @@ namespace RentACar.Controllers
 
 
                     ViewBag.VoziloId = new SelectList(ids);
+                    ViewBag.Poraka = "Veke postoi rezervacija za vneseniot termin";
 
                     return View();
                 }
@@ -126,6 +170,7 @@ namespace RentACar.Controllers
 
 
                     ViewBag.VoziloId = new SelectList(ids);
+                    ViewBag.Poraka = "Veke postoi rezervacija za vneseniot termin";
 
                     return View();
                 }
