@@ -16,16 +16,18 @@ namespace RentACar.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        
         // GET: Rezervacijas
         public ActionResult Index()
         {
-            /*
-            string role = Roles.GetRolesForUser()[0];
             
-            if (role == "Administrator")
+            //string role = Roles.GetRolesForUser()[0];
+            
+            if (User.IsInRole("Administrator"))
             {
                 var rezervacii = db.Rezervacii.Include(r => r.Korisnik).Include(r => r.Vozilo);
                 return View(rezervacii.ToList());
+                
             }
             else // site koi ne se administrator a treba USER ???
             {
@@ -40,10 +42,11 @@ namespace RentACar.Controllers
 
 
                 var korisnik = db.Korisnici.Where(k => k.email == email).First();
-                var rezervacii = db.Rezervacii.Include(r => r.Korisnik).Include(r => r.Vozilo).Where (k => k.KorisnikId == korisnik.KorisnikId;
+                var rezervacii = db.Rezervacii.Include(r => r.Korisnik).Include(r => r.Vozilo).Where (k => k.KorisnikId == korisnik.KorisnikId);
                 return View(rezervacii.ToList());
-            } */
+            } 
 
+            /*
             var rezervacii = db.Rezervacii.Include(r => r.Korisnik).Include(r => r.Vozilo);
 
             string email = User.Identity.GetUserName();
@@ -58,7 +61,7 @@ namespace RentACar.Controllers
             ViewBag.KorisnikId = korisnik.KorisnikId;
 
             return View(rezervacii.ToList());
-
+               */
 
 
         }
