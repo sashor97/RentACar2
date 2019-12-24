@@ -7,41 +7,73 @@
 
 @using (Html.BeginForm())
 {
+
     @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <h4>Rezervacija</h4>
+        <hr />
 
-<div class="form-horizontal">
-    <h4>Rezervacija</h4>
-    <hr />
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.DateFrom, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.DateFrom, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.DateFrom, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.DateFrom, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DateFrom, new { htmlAttributes = new { @class = "datepicker" } })
+                @Html.ValidationMessageFor(model => model.DateFrom, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.DateTo, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.DateTo, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.DateTo, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.DateTo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DateTo, new { htmlAttributes = new { @class = "datepicker" } })
+                @Html.ValidationMessageFor(model => model.DateTo, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group" style="display:none">
-        @Html.LabelFor(model => model.VoziloId, "VoziloId", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("VoziloId", null, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.VoziloId, "", new { @class = "text-danger" })
+        <div class="form-group" style="display:none">
+            @Html.LabelFor(model => model.VoziloId, "VoziloId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("VoziloId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.VoziloId, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
         </div>
+
+        @if (ViewBag.Poraka != "")
+        {
+            <p><b>@ViewBag.Poraka</b></p>
+        }
+
     </div>
-</div>
 }
 
+
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+
+
+<!--
+section script{
+
+
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+
+    <script>
+        $(function () {
+            $(".datapicker").datepicker({
+                dateFormat: "dd/mm/yy",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "0:+2",
+                minData: new Date(),
+                buttonText: "<i class='fa fa-calendar'></i>"
+
+            })
+        })
+    </script>
+
+}
+    -->

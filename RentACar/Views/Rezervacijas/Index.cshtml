@@ -20,7 +20,7 @@
         <th>
             @Html.DisplayNameFor(model => model.denoviIznajmuvanje)
         </th>
-        
+
         <th>
             @Html.DisplayNameFor(model => model.total)
         </th>
@@ -33,33 +33,38 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Korisnik.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Vozilo.ModelName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.denoviIznajmuvanje)
-        </td>
-     
-        <td>
-            @Html.DisplayFor(modelItem => item.total)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DateFrom)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DateTo)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.RezervacijaId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.RezervacijaId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.RezervacijaId })
-        </td>
-    </tr>
-}
+    @if (User.IsInRole("Administrator"))
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Korisnik.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Vozilo.ModelName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.denoviIznajmuvanje)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.total)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateFrom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateTo)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.RezervacijaId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.RezervacijaId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.RezervacijaId })
+                </td>
+            </tr>
+        }
+    }
+
 
 </table>

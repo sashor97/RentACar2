@@ -6,6 +6,7 @@
     <title>Rent-a-Car</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    
 
 </head>
 <body>
@@ -36,7 +37,9 @@
         </div>
     </div>
     <div class="container body-content">
+      
         @RenderBody()
+       
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year   Rent-a-Car</p>
