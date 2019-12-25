@@ -35,6 +35,7 @@ namespace RentACar.Controllers
             return View(sopstvenik);
         }
 
+        [Authorize(Roles = "Administrator, Owner")]
         // GET: Sopstveniks/Create
         public ActionResult Create()
         {
@@ -58,6 +59,7 @@ namespace RentACar.Controllers
             return View(sopstvenik);
         }
 
+        [Authorize(Roles = "Administrator, Owner")]
         // GET: Sopstveniks/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -89,6 +91,7 @@ namespace RentACar.Controllers
             return View(sopstvenik);
         }
 
+        [Authorize(Roles = "Administrator")]
         // GET: Sopstveniks/Delete/5
         public ActionResult Delete(int? id)
         {

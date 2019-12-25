@@ -77,6 +77,10 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.RezervacijaId }) |
-    @Html.ActionLink("Back to List", "Index")
+    @if (User.IsInRole("User") || User.IsInRole("Owner"))
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.RezervacijaId })  <span> | </span>
+    }
+
+@Html.ActionLink("Back to List", "Index")
 </p>

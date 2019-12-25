@@ -14,7 +14,9 @@ namespace RentACar.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        [Authorize(Roles = "Administrator, User")]
         // GET: Korisniks
+        // ako e so uloga User prikazi go momentalniot User inaku prikazi gi site sopstvenici
         public ActionResult Index()
         {
             return View(db.Korisnici.ToList());

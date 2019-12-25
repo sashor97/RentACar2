@@ -35,6 +35,7 @@ namespace RentACar.Controllers
             return View(proizvoditel);
         }
 
+        [Authorize(Roles ="Administrator, Owner")]
         // GET: Proizvoditels/Create
         public ActionResult Create()
         {
@@ -58,6 +59,7 @@ namespace RentACar.Controllers
             return View(proizvoditel);
         }
 
+        [Authorize(Roles = "Administrator")]
         // GET: Proizvoditels/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -72,6 +74,7 @@ namespace RentACar.Controllers
             }
             return View(proizvoditel);
         }
+
 
         // POST: Proizvoditels/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -89,6 +92,7 @@ namespace RentACar.Controllers
             return View(proizvoditel);
         }
 
+        [Authorize(Roles = "Administrator")]
         // GET: Proizvoditels/Delete/5
         public ActionResult Delete(int? id)
         {

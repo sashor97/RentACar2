@@ -16,16 +16,44 @@ namespace RentACar.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+
+
+        public ActionResult ShowRezervationForVozilo(int id)
+        {
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            
+
+            
+             var rezervacii = db.Rezervacii.Include(r => r.Korisnik).Include(r => r.Vozilo).Where(r => r.VoziloId == id);
+
+            var vozilo = db.Vozila.Find(id);
+            ViewBag.vozilo = vozilo.ModelName;
+            ViewBag.voziloId = id;
+
+            return View(rezervacii.ToList());
+
+            
+
+        }
+
+
+
+        [Authorize(Roles = "Administrator, User, Owner")]
         // GET: Rezervacijas
         public ActionResult Index()
         {
-            /*
-            string role = Roles.GetRolesForUser()[0];
             
-            if (role == "Administrator")
+            //string role = Roles.GetRolesForUser()[0];
+            
+            if (User.IsInRole("Administrator"))
             {
                 var rezervacii = db.Rezervacii.Include(r => r.Korisnik).Include(r => r.Vozilo);
                 return View(rezervacii.ToList());
+                
             }
             else // site koi ne se administrator a treba USER ???
             {
@@ -40,10 +68,11 @@ namespace RentACar.Controllers
 
 
                 var korisnik = db.Korisnici.Where(k => k.email == email).First();
-                var rezervacii = db.Rezervacii.Include(r => r.Korisnik).Include(r => r.Vozilo).Where (k => k.KorisnikId == korisnik.KorisnikId;
+                var rezervacii = db.Rezervacii.Include(r => r.Korisnik).Include(r => r.Vozilo).Where (k => k.KorisnikId == korisnik.KorisnikId);
                 return View(rezervacii.ToList());
-            } */
+            } 
 
+            /*
             var rezervacii = db.Rezervacii.Include(r => r.Korisnik).Include(r => r.Vozilo);
 
             string email = User.Identity.GetUserName();
@@ -58,11 +87,12 @@ namespace RentACar.Controllers
             ViewBag.KorisnikId = korisnik.KorisnikId;
 
             return View(rezervacii.ToList());
-
+               */
 
 
         }
 
+        [Authorize(Roles="User")]
         // GET: Rezervacijas/CreateForVozilo/1
         public ActionResult CreateForVozilo(int id)
         {
@@ -118,6 +148,18 @@ namespace RentACar.Controllers
             var korisnici = db.Korisnici.Where(k => k.email == email).First();
             rezervacija.KorisnikId = korisnici.KorisnikId;
 
+
+            if (DateTime.Compare(rezervacija.DateFrom, rezervacija.DateTo) >= 0)
+            {
+                List<int> ids = new List<int>();
+                ids.Add(model.VoziloId);
+
+
+                ViewBag.VoziloId = new SelectList(ids);
+                ViewBag.Poraka = "Krajniot datum (DateTo) treba da bide pogolem od pocetniot datum (DateFrom)!!!";
+
+                return View();
+            }
 
 
             var rezervacii = db.Rezervacii.Where(m => m.VoziloId == model.VoziloId);
@@ -224,6 +266,7 @@ namespace RentACar.Controllers
             return View(rezervacija);
         }
 
+
         // GET: Rezervacijas/Create
         public ActionResult Create()
         {
@@ -268,6 +311,7 @@ namespace RentACar.Controllers
             return View(rezervacija);
         }
 
+        [Authorize(Roles = "Administrator, User, Owner")]
         // GET: Rezervacijas/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -303,6 +347,7 @@ namespace RentACar.Controllers
             return View(rezervacija);
         }
 
+        [Authorize(Roles = "Administrator, User, Owner")]
         // GET: Rezervacijas/Delete/5
         public ActionResult Delete(int? id)
         {

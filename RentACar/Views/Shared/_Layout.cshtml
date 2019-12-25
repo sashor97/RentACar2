@@ -22,14 +22,36 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    
+
                     <li>@Html.ActionLink("Категории", "Index", "Kategorijas")</li>
                     <li>@Html.ActionLink("Возила", "Index", "Voziloes")</li>
                     <li>@Html.ActionLink("Производители", "Index", "Proizvoditels")</li>
                     <li>@Html.ActionLink("Сопственици", "Index", "Sopstveniks")</li>
-                    <li>@Html.ActionLink("Резервации", "Index", "Rezervacijas")</li>
-                    <li>@Html.ActionLink("Корисници", "Index", "Korisniks")</li>
-                    <li>@Html.ActionLink("Коментари", "Index", "Komentars")</li>
+                    @if (User.IsInRole("Administrator") || User.IsInRole("User") || User.IsInRole("Owner"))
+                    {
+                        <li>@Html.ActionLink("Резервации", "Index", "Rezervacijas")</li>
+                    }
+
+
+                     @if (User.IsInRole("Administrator") || User.IsInRole("User"))
+                     {
+                        <li>@Html.ActionLink("Корисници", "Index", "Korisniks")</li>
+                     }
+
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        <li>@Html.ActionLink("Коментари", "Index", "Komentars")</li>
+                    }
+
+                    @if (User.IsInRole("User"))
+                    {
+                        <li>@Html.ActionLink("Мои коментари", "Index", "Komentars")</li>
+                    }
+
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        <li>@Html.ActionLink("Додај пермисии", "AddUserToRole", "Account")</li>
+                    }
 
                 </ul>
                 @Html.Partial("_LoginPartial")

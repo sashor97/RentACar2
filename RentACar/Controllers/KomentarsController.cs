@@ -16,12 +16,34 @@ namespace RentACar.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Komentars
+        [Authorize(Roles ="Administrator, User")]
         public ActionResult Index()
         {
-            var komentari = db.Komentari.Include(k => k.Korisnik).Include(k => k.Vozilo);
-            return View(komentari.ToList());
+            if (User.IsInRole("Administrator"))
+            {
+                var komentari = db.Komentari.Include(k => k.Korisnik).Include(k => k.Vozilo);
+                return View(komentari.ToList());
+            }
+
+            else
+            {
+                string email = User.Identity.GetUserName();
+
+                var Korisnici = db.Korisnici.Where(k => k.email == email);
+                var count = db.Korisnici.Where(k => k.email == email).Count();
+                if (count == 0)
+                {
+                    return RedirectToAction("Create", "Korisniks");
+                }
+
+
+                var korisnik = db.Korisnici.Where(k => k.email == email).First();
+                var komentari = db.Komentari.Include(k => k.Korisnik).Include(k => k.Vozilo).Where(k => k.KorisnikId == korisnik.KorisnikId);
+                return View(komentari.ToList());
+            }
         }
 
+        
         // GET: Komentars/Details/5
         public ActionResult Details(int? id)
         {
@@ -36,6 +58,8 @@ namespace RentACar.Controllers
             }
             return View(komentar);
         }
+
+        [Authorize(Roles = "User")]
         public ActionResult DodadiKomentarZaVozilo(int id)
         {
 

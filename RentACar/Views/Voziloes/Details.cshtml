@@ -7,7 +7,7 @@
 <h2>Детали за @Model.ModelName</h2>
 
 <div>
-    
+
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -57,11 +57,16 @@
 </div>
 
 
-@Html.ActionLink("Резервирај", "CreateForVozilo", "Rezervacijas", new { id = Model.VoziloId }, new { })
+@Html.ActionLink("Прикажи резервации за возилото", "ShowRezervationForVozilo", "Rezervacijas", new { id = Model.VoziloId }, new { }) <br /> <br />
+
+@Html.ActionLink("Резервирај", "CreateForVozilo", "Rezervacijas", new { id = Model.VoziloId }, new { }) <br /> <br />
+
+
+
 
 
 <a href="/Komentars/DodadiKomentarZaVozilo/@Model.VoziloId"><h5>Додај коментар</h5></a>
-
+<br /> 
 <h4>Коментари</h4>
 <div>
 
@@ -76,6 +81,10 @@
 </div>
 
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.VoziloId }) |
+    @if (User.IsInRole("Administrator") || User.IsInRole("Owner"))
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.VoziloId }) <span> | </span>
+    }
+
     @Html.ActionLink("Back to List", "Index")
 </p>

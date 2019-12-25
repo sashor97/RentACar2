@@ -51,6 +51,7 @@ namespace RentACar.Controllers
             return View(kategorija);
         }
 
+        [Authorize(Roles = "Administrator")]
         // GET: Kategorijas/Create
         public ActionResult Create()
         {
@@ -74,6 +75,7 @@ namespace RentACar.Controllers
             return View(kategorija);
         }
 
+        [Authorize(Roles = "Administrator")]
         // GET: Kategorijas/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -105,6 +107,7 @@ namespace RentACar.Controllers
             return View(kategorija);
         }
 
+        [Authorize(Roles = "Administrator")]
         // GET: Kategorijas/Delete/5
         public ActionResult Delete(int? id)
         {

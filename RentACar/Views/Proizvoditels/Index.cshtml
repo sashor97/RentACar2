@@ -7,7 +7,11 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @if (User.IsInRole("Administrator") || User.IsInRole("Owner"))
+    {
+        @Html.ActionLink("Create New", "Create");
+    }
+
 </p>
 <table class="table">
     <tr>
@@ -29,9 +33,15 @@
             @Html.DisplayFor(modelItem => item.Year)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ProizvoditelId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ProizvoditelId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ProizvoditelId })
+            @if (User.IsInRole("Administrator"))
+            {
+                @Html.ActionLink("Edit", "Edit", new { id = item.ProizvoditelId }) <span> | </span>
+
+                @Html.ActionLink("Delete", "Delete", new { id = item.ProizvoditelId })  <span> | </span>
+            }
+
+
+            @Html.ActionLink("Details", "Details", new { id = item.ProizvoditelId })
         </td>
     </tr>
 }
