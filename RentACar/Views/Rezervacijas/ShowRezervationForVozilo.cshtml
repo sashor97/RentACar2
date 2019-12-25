@@ -1,0 +1,71 @@
+﻿@model IEnumerable<RentACar.Models.Rezervacija>
+@{
+    ViewBag.Title = "ShowRezervationForVozilo";
+}
+
+<h2>Сите резервации за возилото @ViewBag.vozilo : </h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Korisnik.Name)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.denoviIznajmuvanje)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.DateFrom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateTo)
+        </th>
+        <th></th>
+    </tr>
+
+
+    @foreach (var item in Model)
+    {
+        <!-- if (item.KorisnikId == ViewBag.KorisnikId)
+         {
+            -->
+
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Korisnik.Name)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.denoviIznajmuvanje)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.DateFrom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateTo)
+            </td>
+            <td>
+                @if (User.IsInRole("User") || User.IsInRole("Owner"))
+                {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.RezervacijaId }) <span> | </span>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.RezervacijaId }) <span> | </span>
+                    @Html.ActionLink("Details", "Details", new { id = item.RezervacijaId })
+                }
+
+            </td>
+        </tr>
+
+        <!--}-->
+    }
+
+
+
+</table>
+
+
+@Html.ActionLink("Резервирај", "CreateForVozilo", "Rezervacijas", new { id = ViewBag.voziloId }, new { })  <br /> <br />
+@Html.ActionLink("Врати се назад", "Details", "Voziloes", new { id = ViewBag.voziloId }, new { }) <br /> <br />
+@Html.ActionLink("Назад кон возила", "Index", "Voziloes")
+

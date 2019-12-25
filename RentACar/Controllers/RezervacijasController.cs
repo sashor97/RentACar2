@@ -16,7 +16,32 @@ namespace RentACar.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        
+
+
+        public ActionResult ShowRezervationForVozilo(int id)
+        {
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            
+
+            
+             var rezervacii = db.Rezervacii.Include(r => r.Korisnik).Include(r => r.Vozilo).Where(r => r.VoziloId == id);
+
+            var vozilo = db.Vozila.Find(id);
+            ViewBag.vozilo = vozilo.ModelName;
+            ViewBag.voziloId = id;
+
+            return View(rezervacii.ToList());
+
+            
+
+        }
+
+
+
         [Authorize(Roles = "Administrator, User, Owner")]
         // GET: Rezervacijas
         public ActionResult Index()
@@ -123,6 +148,18 @@ namespace RentACar.Controllers
             var korisnici = db.Korisnici.Where(k => k.email == email).First();
             rezervacija.KorisnikId = korisnici.KorisnikId;
 
+
+            if (DateTime.Compare(rezervacija.DateFrom, rezervacija.DateTo) >= 0)
+            {
+                List<int> ids = new List<int>();
+                ids.Add(model.VoziloId);
+
+
+                ViewBag.VoziloId = new SelectList(ids);
+                ViewBag.Poraka = "Krajniot datum (DateTo) treba da bide pogolem od pocetniot datum (DateFrom)!!!";
+
+                return View();
+            }
 
 
             var rezervacii = db.Rezervacii.Where(m => m.VoziloId == model.VoziloId);
