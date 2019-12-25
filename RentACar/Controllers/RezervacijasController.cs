@@ -17,6 +17,7 @@ namespace RentACar.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         
+
         // GET: Rezervacijas
         public ActionResult Index()
         {
@@ -66,6 +67,7 @@ namespace RentACar.Controllers
 
         }
 
+        [Authorize(Roles="User")]
         // GET: Rezervacijas/CreateForVozilo/1
         public ActionResult CreateForVozilo(int id)
         {

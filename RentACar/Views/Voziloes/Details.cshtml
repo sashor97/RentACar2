@@ -76,6 +76,10 @@
 </div>
 
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.VoziloId }) |
+    @if (User.IsInRole("Administrator") || User.IsInRole("Owner"))
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.VoziloId }) <span> | </span>
+    }
+
     @Html.ActionLink("Back to List", "Index")
 </p>

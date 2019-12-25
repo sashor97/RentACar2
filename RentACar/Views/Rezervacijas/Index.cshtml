@@ -6,9 +6,6 @@
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -61,9 +58,13 @@
                 @Html.DisplayFor(modelItem => item.DateTo)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.RezervacijaId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.RezervacijaId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.RezervacijaId })
+                @if (User.IsInRole("User") || User.IsInRole("Owner"))
+                {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.RezervacijaId })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.RezervacijaId })
+                    @Html.ActionLink("Details", "Details", new { id = item.RezervacijaId })
+                }
+
             </td>
         </tr>
 

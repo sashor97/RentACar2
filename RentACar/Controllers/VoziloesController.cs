@@ -36,6 +36,7 @@ namespace RentACar.Controllers
             return View(vozilo);
         }
 
+        [Authorize(Roles = "Administrator, Owner")]
         // GET: Voziloes/Create
         public ActionResult Create()
         {
@@ -65,6 +66,7 @@ namespace RentACar.Controllers
             return View(vozilo);
         }
 
+        [Authorize(Roles = "Administrator, Owner")]
         // GET: Voziloes/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -102,6 +104,7 @@ namespace RentACar.Controllers
             return View(vozilo);
         }
 
+        [Authorize(Roles = "Administrator, Owner")]
         // GET: Voziloes/Delete/5
         public ActionResult Delete(int? id)
         {

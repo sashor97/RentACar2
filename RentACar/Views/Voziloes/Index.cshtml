@@ -7,7 +7,11 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @if (User.IsInRole("Administrator") || User.IsInRole("Owner"))
+    {
+        @Html.ActionLink("Create New", "Create")
+    }
+
 </p>
 <table class="table">
     <tr>
@@ -36,7 +40,7 @@
         
         
         <th>
-            Админ
+            Опции
         </th>
 
         <th>
@@ -74,9 +78,15 @@
 
 
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.VoziloId }) |
-            @Html.ActionLink("Details", "Details", new { id = item.VoziloId }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.VoziloId })
+            @if (User.IsInRole("Administrator") || User.IsInRole("Owner"))
+            {
+                @Html.ActionLink("Edit", "Edit", new { id = item.VoziloId }) <span> | </span>
+
+                @Html.ActionLink("Delete", "Delete", new { id = item.VoziloId }) <span> | </span>
+            }
+
+
+            @Html.ActionLink("Details", "Details", new { id = item.VoziloId })
         </td>
 
         <td>
