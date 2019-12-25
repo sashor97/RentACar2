@@ -33,6 +33,11 @@ namespace RentACar.Models
         [Range(18,99,ErrorMessage ="Сопственикот треба да биде полнолетен")]
         public int Age { get; set; }
 
+        [Required(ErrorMessage = "Емаилот е задолжителен")]
+        [Display(Name = "Емаил")]
+        [RegularExpression(@"[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}", ErrorMessage = "Невалиден формат на емаил")]
+        public string email { get; set; }
+
         public List<Vozilo> Vozila { get; set; }
 
         public Sopstvenik()

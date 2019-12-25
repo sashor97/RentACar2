@@ -55,6 +55,7 @@ namespace RentACar.Controllers
                 return View(rezervacii.ToList());
                 
             }
+            
             else // site koi ne se administrator a treba USER ???
             {
                 string email = User.Identity.GetUserName();
