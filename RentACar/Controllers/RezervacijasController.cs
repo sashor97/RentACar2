@@ -17,7 +17,7 @@ namespace RentACar.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         
-
+        [Authorize(Roles = "Administrator, User, Owner")]
         // GET: Rezervacijas
         public ActionResult Index()
         {
@@ -229,6 +229,7 @@ namespace RentACar.Controllers
             return View(rezervacija);
         }
 
+
         // GET: Rezervacijas/Create
         public ActionResult Create()
         {
@@ -273,6 +274,7 @@ namespace RentACar.Controllers
             return View(rezervacija);
         }
 
+        [Authorize(Roles = "Administrator, User, Owner")]
         // GET: Rezervacijas/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -308,6 +310,7 @@ namespace RentACar.Controllers
             return View(rezervacija);
         }
 
+        [Authorize(Roles = "Administrator, User, Owner")]
         // GET: Rezervacijas/Delete/5
         public ActionResult Delete(int? id)
         {
