@@ -196,6 +196,14 @@
     <Compile Include="Migrations\201912112307450_changeKorisnik.Designer.cs">
       <DependentUpon>201912112307450_changeKorisnik.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912251424184_addRegularExpressEmail_andEmailtoSopsvenik.cs" />
+    <Compile Include="Migrations\201912251424184_addRegularExpressEmail_andEmailtoSopsvenik.Designer.cs">
+      <DependentUpon>201912251424184_addRegularExpressEmail_andEmailtoSopsvenik.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001071701584_removeYearProizvoditel.cs" />
+    <Compile Include="Migrations\202001071701584_removeYearProizvoditel.Designer.cs">
+      <DependentUpon>202001071701584_removeYearProizvoditel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AddComment.cs" />
@@ -380,6 +388,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912112307450_changeKorisnik.resx">
       <DependentUpon>201912112307450_changeKorisnik.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912251424184_addRegularExpressEmail_andEmailtoSopsvenik.resx">
+      <DependentUpon>201912251424184_addRegularExpressEmail_andEmailtoSopsvenik.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001071701584_removeYearProizvoditel.resx">
+      <DependentUpon>202001071701584_removeYearProizvoditel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

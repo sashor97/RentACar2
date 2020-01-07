@@ -17,10 +17,8 @@ namespace RentACar.Models
         [Display(Name = "Име на производител")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Годината на производство на возилото е задолжителна")]
-        [Range(1900,2019,ErrorMessage = "Годината на производство  треба да е измеѓу 1900 и 2019")]
-        [Display(Name = "Година на производство")]
-        public int Year { get; set; }
+        
+        
 
         public List<Vozilo> Vozila { get; set; }
   
