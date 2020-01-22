@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -55,6 +56,7 @@ namespace RentACar.Controllers
                 return View(rezervacii.ToList());
                 
             }
+            
             else // site koi ne se administrator a treba USER ???
             {
                 string email = User.Identity.GetUserName();
@@ -131,9 +133,16 @@ namespace RentACar.Controllers
         {
 
             Rezervacija rezervacija = new Rezervacija();
-           // rezervacija.denoviIznajmuvanje = model.denoviIznajmuvanje;
-            rezervacija.DateFrom = Convert.ToDateTime(model.DateFrom);
-            rezervacija.DateTo = Convert.ToDateTime(model.DateTo);
+            // rezervacija.denoviIznajmuvanje = model.denoviIznajmuvanje;
+            string pattern = "dd/MM/yyyy";
+            DateTime.TryParseExact(model.DateFrom, pattern, null,
+                                   DateTimeStyles.None, out DateTime dateFrom);
+            DateTime.TryParseExact(model.DateTo, pattern, null,
+                                   DateTimeStyles.None, out DateTime dateTo);
+            // rezervacija.DateFrom = Convert.ToDateTime(model.DateFrom, new DateTimeFormatInfo { FullDateTimePattern = "dd/MM/yyyy" });
+            // rezervacija.DateTo = Convert.ToDateTime(model.DateTo, new DateTimeFormatInfo { FullDateTimePattern = "dd/MM/yyyy" });
+            rezervacija.DateFrom = dateFrom;
+            rezervacija.DateTo = dateTo;
             rezervacija.VoziloId = model.VoziloId;
             string dif = (rezervacija.DateTo - rezervacija.DateFrom).TotalDays.ToString();
             rezervacija.denoviIznajmuvanje = Convert.ToInt32(dif);
@@ -148,6 +157,17 @@ namespace RentACar.Controllers
             var korisnici = db.Korisnici.Where(k => k.email == email).First();
             rezervacija.KorisnikId = korisnici.KorisnikId;
 
+            if (DateTime.Compare(rezervacija.DateFrom, DateTime.Now.AddDays(-1)) < 0 || DateTime.Compare(rezervacija.DateTo, DateTime.Now) < 0)
+            {
+                List<int> ids = new List<int>();
+                ids.Add(model.VoziloId);
+
+
+                ViewBag.VoziloId = new SelectList(ids);
+                ViewBag.Poraka = "Nemoze da se rezervira vo minatoto!!!";
+
+                return View();
+            }
 
             if (DateTime.Compare(rezervacija.DateFrom, rezervacija.DateTo) >= 0)
             {

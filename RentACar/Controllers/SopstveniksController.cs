@@ -47,7 +47,7 @@ namespace RentACar.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "SopstvenikId,Name,LastName,Address,Age")] Sopstvenik sopstvenik)
+        public ActionResult Create([Bind(Include = "SopstvenikId,Name,LastName,Address,Age,email")] Sopstvenik sopstvenik)
         {
             if (ModelState.IsValid)
             {
@@ -80,7 +80,7 @@ namespace RentACar.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "SopstvenikId,Name,LastName,Address,Age")] Sopstvenik sopstvenik)
+        public ActionResult Edit([Bind(Include = "SopstvenikId,Name,LastName,Address,Age,email")] Sopstvenik sopstvenik)
         {
             if (ModelState.IsValid)
             {

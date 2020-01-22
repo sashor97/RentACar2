@@ -51,7 +51,7 @@ namespace RentACar.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Komentar komentar = db.Komentari.Find(id);
+            Komentar komentar = db.Komentari.Include(k=>k.Korisnik).Include(k=>k.Vozilo).Where(k=>k.SopstvenikId==id).First();
             if (komentar == null)
             {
                 return HttpNotFound();

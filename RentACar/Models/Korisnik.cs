@@ -35,6 +35,7 @@ namespace RentACar.Models
 
         [Required(ErrorMessage = "Емаилот е задолжителен")]
         [Display(Name = "Емаил")]
+        [RegularExpression(@"[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}", ErrorMessage = "Невалиден формат на емаил")]
         public string email { get; set; }
 
         public List<Komentar> Komentari { get; set; }

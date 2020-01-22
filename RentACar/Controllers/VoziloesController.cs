@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using RentACar.Models;
 
 namespace RentACar.Controllers
@@ -17,8 +18,24 @@ namespace RentACar.Controllers
         // GET: Voziloes
         public ActionResult Index()
         {
-            var vozila = db.Vozila.Include(v => v.Kategorija).Include(v => v.Proizvoditel).Include(v => v.Sopstvenik);
-            return View(vozila.ToList());
+            if (User.IsInRole("Owner"))
+            {
+                string email = User.Identity.GetUserName();
+
+                var Sopstvenici = db.Sopstvenici.Where(k => k.email == email).First();
+                var count = db.Sopstvenici.Where(k => k.email == email).Count();
+                if (count == 0)
+                {
+                    return RedirectToAction("Create", "Korisniks");
+                }
+                var vozila = db.Vozila.Include(v => v.Kategorija).Include(v => v.Proizvoditel).Include(v => v.Sopstvenik).Where(v => v.SopstvenikId == Sopstvenici.SopstvenikId);
+                return View(vozila.ToList());
+            }
+            else
+            {
+                var vozila = db.Vozila.Include(v => v.Kategorija).Include(v => v.Proizvoditel).Include(v => v.Sopstvenik);
+                return View(vozila.ToList());
+            }
         }
 
         // GET: Voziloes/Details/5

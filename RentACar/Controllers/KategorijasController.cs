@@ -17,7 +17,8 @@ namespace RentACar.Controllers
         // GET: Kategorijas
         public ActionResult Index()
         {
-            return View(db.Kategorii.ToList());
+            
+            return View(db.Kategorii.Include(k => k.Vozila).ToList());
         }
 
         // GET: Kategorijas/Details/5
