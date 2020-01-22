@@ -17,7 +17,25 @@ namespace RentACar.Controllers
         // GET: Proizvoditels
         public ActionResult Index()
         {
-            return View(db.Proizvoditeli.ToList());
+            return View(db.Proizvoditeli.Include(pr=>pr.Vozila).ToList());
+        }
+
+
+        public ActionResult PrikaziVozilaProizvoditel(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Proizvoditel proizvoditel = db.Proizvoditeli.Include(k => k.Vozila).Where(k => k.ProizvoditelId == id).First();
+            if (proizvoditel == null)
+            {
+                return HttpNotFound();
+            }
+
+            var vozila = proizvoditel.Vozila;
+
+            return View(proizvoditel);
         }
 
         // GET: Proizvoditels/Details/5
@@ -35,7 +53,7 @@ namespace RentACar.Controllers
             return View(proizvoditel);
         }
 
-        [Authorize(Roles ="Administrator, Owner")]
+        [Authorize(Roles ="Administrator")]
         // GET: Proizvoditels/Create
         public ActionResult Create()
         {

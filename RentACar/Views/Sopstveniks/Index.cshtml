@@ -13,23 +13,26 @@
     }
     
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Address)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Age)
-        </th>
-        <th></th>
-    </tr>
+<table id="tabela" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Age)
+            </th>
+            <th>Емаил</th><th>Опции</th><th>Возила</th>
+        </tr>
+     </thead>
 
+    <tbody>
 @foreach (var item in Model) {
     <tr>
         <td>
@@ -56,7 +59,20 @@
 
             @Html.ActionLink("Details", "Details", new { id = item.SopstvenikId })
         </td>
+
+        <td>Link Види возила</td>
     </tr>
 }
+        </tbody>
 
 </table>
+
+@section Scripts{
+    
+    <script>
+        $(document).ready(function () {
+            $("#tabela").DataTable();
+        });
+    </script>
+    
+    }

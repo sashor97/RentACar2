@@ -59,19 +59,40 @@ namespace RentACar.Controllers
             
             else // site koi ne se administrator a treba USER ???
             {
-                string email = User.Identity.GetUserName();
 
-                var Korisnici = db.Korisnici.Where(k => k.email == email);
-                var count = db.Korisnici.Where(k => k.email == email).Count();
-                if (count == 0)
+                if (User.IsInRole("Owner"))
                 {
-                    return RedirectToAction("Create", "Korisniks");
+                    string email = User.Identity.GetUserName();
+                    var sopstvenikId = db.Sopstvenici.Where(s => s.email == email).FirstOrDefault().SopstvenikId;
+
+
+                    var vozila = db.Vozila.Include(r => r.Rezervacija).Where(v => v.SopstvenikId == sopstvenikId).ToList();
+                    
+                    var rezervacii = new List<Rezervacija>();
+                    vozila.ForEach(v =>
+                    {
+                        rezervacii.AddRange(db.Rezervacii.Include(r => r.Korisnik).Where(r => r.VoziloId==v.VoziloId));
+                    });
+                    return View(rezervacii);
+                }
+                else
+                {
+                    string email = User.Identity.GetUserName();
+
+                    var Korisnici = db.Korisnici.Where(k => k.email == email);
+                    var count = db.Korisnici.Where(k => k.email == email).Count();
+                    if (count == 0)
+                    {
+                        return RedirectToAction("Create", "Korisniks");
+                    }
+
+
+                    var korisnik = db.Korisnici.Where(k => k.email == email).First();
+                    var rezervacii = db.Rezervacii.Include(r => r.Korisnik).Include(r => r.Vozilo).Where(k => k.KorisnikId == korisnik.KorisnikId);
+                    return View(rezervacii.ToList());
                 }
 
-
-                var korisnik = db.Korisnici.Where(k => k.email == email).First();
-                var rezervacii = db.Rezervacii.Include(r => r.Korisnik).Include(r => r.Vozilo).Where (k => k.KorisnikId == korisnik.KorisnikId);
-                return View(rezervacii.ToList());
+                
             } 
 
             /*

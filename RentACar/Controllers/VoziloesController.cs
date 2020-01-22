@@ -18,6 +18,7 @@ namespace RentACar.Controllers
         // GET: Voziloes
         public ActionResult Index()
         {
+            
             if (User.IsInRole("Owner"))
             {
                 string email = User.Identity.GetUserName();
@@ -32,10 +33,10 @@ namespace RentACar.Controllers
                 return View(vozila.ToList());
             }
             else
-            {
+            { 
                 var vozila = db.Vozila.Include(v => v.Kategorija).Include(v => v.Proizvoditel).Include(v => v.Sopstvenik);
                 return View(vozila.ToList());
-            }
+             }
         }
 
         // GET: Voziloes/Details/5

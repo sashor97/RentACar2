@@ -6,7 +6,9 @@
 
 <h2>Index</h2>
 
-<table class="table">
+<table id="tabela" class="table">
+
+    <thead>
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Korisnik.Name)
@@ -27,9 +29,11 @@
         <th>
             @Html.DisplayNameFor(model => model.DateTo)
         </th>
-        <th></th>
+        <th>Опции</th>
     </tr>
+        </thead>
 
+    <tbody>
 
     @foreach (var item in Model)
     {
@@ -72,5 +76,15 @@
     }
 
 
-
+        </tbody>
 </table>
+
+@section Scripts{
+
+    <script>
+        $(document).ready(function () {
+            $("#tabela").DataTable();
+        });
+    </script>
+
+}

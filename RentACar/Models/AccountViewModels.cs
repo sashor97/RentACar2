@@ -49,16 +49,16 @@ namespace RentACar.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
+        [Display(Name = "Емаил")]
         [EmailAddress]
         public string Email { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Лозинка")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "Запомни ме?")]
         public bool RememberMe { get; set; }
     }
 
@@ -66,37 +66,68 @@ namespace RentACar.Models
     {
         [Required]
         [EmailAddress]
-        [Display(Name = "Email")]
+        [Display(Name = "Емаил")]
         public string Email { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Лозинка")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "Потврди лозинка")]
+        [Compare("Password", ErrorMessage = "Лозинките не се совпаѓаат!")]
         public string ConfirmPassword { get; set; }
+
+        [Required(ErrorMessage = "Името е задолжително")]
+        [StringLength(12, ErrorMessage = "Максималната големина на името треба да е 12 карактери")]
+        [Display(Name = "Име на Сопственик")]
+        public string Name { get; set; }
+
+        [Required(ErrorMessage = "Презимето е задолжително")]
+        [StringLength(20, ErrorMessage = "Максималната големина на презимето треба да е 20 карактери")]
+        [Display(Name = "Презиме на Сопственик")]
+        public string LastName { get; set; }
+
+
+        [Required(ErrorMessage = "Адресата е задолжителна")]
+        //[RegularExpression(@"^[a-zA-Z]{2,20} \d{1,4}$", ErrorMessage = "ИмеАдреса број е правилниот формат кој треба да го внесете")]
+        [Display(Name = "Адреса на сопственикот")]
+        public string Address { get; set; }
+
+
+        [Display(Name = "Години")]
+        [Required(ErrorMessage = "Годините се задолжителни")]
+        [Range(18, 99, ErrorMessage = "Сопственикот треба да биде полнолетен")]
+        public int Age { get; set; }
+
+        public List<string> types { get; set; }
+
+        public string type { get; set; }
+
+        public RegisterViewModel()
+        {
+            types = new List<string>();
+        }
     }
 
     public class ResetPasswordViewModel
     {
         [Required]
         [EmailAddress]
-        [Display(Name = "Email")]
+        [Display(Name = "Емаил")]
         public string Email { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Лозинка")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "Потврди лозинка")]
+        [Compare("Password", ErrorMessage = "Лозинките не се совпаѓаат!")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }
@@ -106,7 +137,7 @@ namespace RentACar.Models
     {
         [Required]
         [EmailAddress]
-        [Display(Name = "Email")]
+        [Display(Name = "Емаил")]
         public string Email { get; set; }
     }
 }

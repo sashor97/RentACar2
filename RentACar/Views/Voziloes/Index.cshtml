@@ -13,87 +13,107 @@
     }
 
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Kategorija.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Proizvoditel.Name)
-        </th>
+<table id="tabela" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Kategorija.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Proizvoditel.Name)
+            </th>
 
-        <th>
-            @Html.DisplayNameFor(model => model.ModelName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ImageUrl)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Location)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Sopstvenik.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PriceDay)
-        </th>
-        
-        
-        <th>
-            Опции
-        </th>
-
-        <th>
-            Резервирај
-        </th>
-        
-        
-
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Kategorija.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Proizvoditel.Name)
-        </td>
-
-        <td>
-            @Html.DisplayFor(modelItem => item.ModelName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ImageUrl)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Location)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Sopstvenik.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PriceDay)
-        </td>
+            <th>
+                @Html.DisplayNameFor(model => model.ModelName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImageUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Location)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sopstvenik.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PriceDay)
+            </th>
 
 
-        <td>
-            @if (User.IsInRole("Administrator") || User.IsInRole("Owner"))
-            {
-                @Html.ActionLink("Edit", "Edit", new { id = item.VoziloId }) <span> | </span>
+            <th>
+                Опции
+            </th>
 
-                @Html.ActionLink("Delete", "Delete", new { id = item.VoziloId }) <span> | </span>
-            }
+            <th>
+
+                Резервирај
+            </th>
 
 
-            @Html.ActionLink("Details", "Details", new { id = item.VoziloId })
-        </td>
 
-        <td>
-            @Html.ActionLink("Резервирај", "CreateForVozilo", "Rezervacijas", new { id = item.VoziloId }, new { })
-        </td>
-        
-    </tr>
-}
+        </tr>
+    </thead>
 
+
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Kategorija.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Proizvoditel.Name)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModelName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ImageUrl)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Location)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sopstvenik.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PriceDay)
+                </td>
+
+
+                <td>
+                    @if (User.IsInRole("Administrator") || User.IsInRole("Owner"))
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.VoziloId }) <span> | </span>
+
+                        @Html.ActionLink("Delete", "Delete", new { id = item.VoziloId }) <span> | </span>
+                    }
+
+
+                    @Html.ActionLink("Details", "Details", new { id = item.VoziloId })
+                </td>
+
+                <td>
+                    @if (!User.IsInRole("Administrator") && !User.IsInRole("Owner"))
+                    {
+                        @Html.ActionLink("Резервирај", "CreateForVozilo", "Rezervacijas", new { id = item.VoziloId }, new { })
+                    }
+                </td>
+
+            </tr>
+        }
+    </tbody>
 </table>
+
+@section Scripts{
+
+    <script>
+        $(document).ready(function () {
+            $("#tabela").DataTable();
+        });
+    </script>
+
+}

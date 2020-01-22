@@ -23,20 +23,38 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
 
+
+                    @if (User.IsInRole("Owner"))
+                    {
+                        <li>@Html.ActionLink("Мои возила", "Index", "Voziloes")</li>
+                    }
+
+                    else
+                    {
+                        <li>@Html.ActionLink("Возила", "Index", "Voziloes")</li>
+                    }
+
                     <li>@Html.ActionLink("Категории", "Index", "Kategorijas")</li>
-                    <li>@Html.ActionLink("Возила", "Index", "Voziloes")</li>
+
                     <li>@Html.ActionLink("Производители", "Index", "Proizvoditels")</li>
+
                     <li>@Html.ActionLink("Сопственици", "Index", "Sopstveniks")</li>
-                    @if (User.IsInRole("Administrator") || User.IsInRole("User") || User.IsInRole("Owner"))
+
+                    @if (User.IsInRole("Administrator") || User.IsInRole("Owner"))
                     {
                         <li>@Html.ActionLink("Резервации", "Index", "Rezervacijas")</li>
                     }
 
+                    @if (User.IsInRole("User"))
+                    {
+                        <li>@Html.ActionLink("Мои резервации", "Index", "Rezervacijas")</li>
+                    }
 
-                     @if (User.IsInRole("Administrator") || User.IsInRole("User"))
-                     {
+
+                    @if (User.IsInRole("Administrator"))
+                    {
                         <li>@Html.ActionLink("Корисници", "Index", "Korisniks")</li>
-                     }
+                    }
 
                     @if (User.IsInRole("Administrator"))
                     {
@@ -48,10 +66,14 @@
                         <li>@Html.ActionLink("Мои коментари", "Index", "Komentars")</li>
                     }
 
-                    @if (User.IsInRole("Administrator"))
-                    {
-                        <li>@Html.ActionLink("Додај пермисии", "AddUserToRole", "Account")</li>
-                    }
+
+                    @*
+                        @if (User.IsInRole("Administrator"))
+                        {
+                            <li>@Html.ActionLink("Додај пермисии", "AddUserToRole", "Account")</li>
+                        }
+                    *@
+
 
                 </ul>
                 @Html.Partial("_LoginPartial")

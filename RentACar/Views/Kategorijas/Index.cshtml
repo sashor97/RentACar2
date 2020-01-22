@@ -9,44 +9,58 @@
 <p>
     @if (User.IsInRole("Administrator"))
     {
-        
+
         @Html.ActionLink("Create New", "Create");
     }
 
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Type)
-        </th>
-        
-        <th></th>
-    </tr>
+<table id="tabela" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
+            <th></th>
+        </tr>
+    </thead>
 
-            <a href="/Kategorijas/PrikaziVozilaKategorija/@item.KategorijaId">@item.Name: (@item.Vozila.Count.ToString())</a>
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Type)
-        </td>
-        
-           
-        
-        <td>
-            @if (User.IsInRole("Administrator"))
-            {
-                @Html.ActionLink("Edit ", "Edit", new { id = item.KategorijaId })  <span> | </span>
-                @Html.ActionLink("Details ", "Details", new { id = item.KategorijaId })  <span> | </span>
-                @Html.ActionLink("Delete ", "Delete", new { id = item.KategorijaId }) 
-            }
-        </td>
-    </tr>
-}
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
 
+                    <a href="/Kategorijas/PrikaziVozilaKategorija/@item.KategorijaId">@item.Name: (@item.Vozila.Count.ToString())</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+
+
+
+                <td>
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        @Html.ActionLink("Edit ", "Edit", new { id = item.KategorijaId }) <span> | </span>
+                        @Html.ActionLink("Details ", "Details", new { id = item.KategorijaId }) <span> | </span>
+                        @Html.ActionLink("Delete ", "Delete", new { id = item.KategorijaId })
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
+
+@section Scripts{
+
+    <script>
+        $(document).ready(function () {
+            $("#tabela").DataTable();
+        });
+    </script>
+
+}

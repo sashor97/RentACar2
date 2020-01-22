@@ -1,0 +1,19 @@
+﻿@model RentACar.Models.Proizvoditel
+@{
+    ViewBag.Title = "PrikaziVozilaKategorija";
+}
+
+<h2>Возила што припаѓаат на производител <b>@Model.Name</b> се:</h2>
+
+<table>
+    @foreach (var item in Model.Vozila)
+    {
+        <tr>
+            <td>
+                <a href="/Voziloes/Details/@item.VoziloId"><h4>@item.ModelName</h4></a>
+            </td>
+
+        </tr>
+    }
+
+</table>

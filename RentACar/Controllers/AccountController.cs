@@ -17,6 +17,7 @@ namespace RentACar.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         public AccountController()
         {
@@ -176,7 +177,10 @@ namespace RentACar.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            RegisterViewModel model = new RegisterViewModel();
+            model.types.Add("Сопственик");
+            model.types.Add("Корисник");
+            return View(model);
         }
 
         //
@@ -192,6 +196,54 @@ namespace RentACar.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    if (model.type == "Сопственик")
+                    {
+                        var sopstvenik = new Sopstvenik();
+                        sopstvenik.Name = model.Name;
+                        sopstvenik.LastName = model.LastName;
+                        sopstvenik.Address = model.Address;
+                        sopstvenik.Age = model.Age;
+                        sopstvenik.email = model.Email;
+                        db.Sopstvenici.Add(sopstvenik);
+
+                        try
+                        {
+                            var userr = UserManager.FindByEmail(model.Email);
+                            UserManager.AddToRole(userr.Id, "Owner");
+                           
+                        }
+
+                        catch (Exception ex)
+                        {
+                            return HttpNotFound();
+                        }
+
+                    }
+                    else
+                    {
+                        var korisnik = new Korisnik();
+                        korisnik.Name = model.Name;
+                        korisnik.LastName = model.LastName;
+                        korisnik.Address = model.Address;
+                        korisnik.Age = model.Age;
+                        korisnik.email = model.Email;
+                        db.Korisnici.Add(korisnik);
+
+                        try
+                        {
+                            var userr = UserManager.FindByEmail(model.Email);
+                            UserManager.AddToRole(userr.Id, "User");
+
+                        }
+
+                        catch (Exception ex)
+                        {
+                            return HttpNotFound();
+                        }
+
+                    }
+                    db.SaveChanges();
+                  
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
