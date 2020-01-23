@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using RentACar.Models;
 
 namespace RentACar.Controllers
@@ -19,6 +20,16 @@ namespace RentACar.Controllers
         // ako e so uloga User prikazi go momentalniot User inaku prikazi gi site sopstvenici
         public ActionResult Index()
         {
+            if (User.IsInRole("User"))
+            {
+                string email = User.Identity.GetUserName();
+                var korisnikId = db.Korisnici.Where(s => s.email == email).FirstOrDefault().KorisnikId;
+
+                var korisnik = db.Korisnici.Where(s => s.KorisnikId == korisnikId);
+
+                return View(korisnik.ToList());
+            }
+
             return View(db.Korisnici.ToList());
         }
 
@@ -37,6 +48,8 @@ namespace RentACar.Controllers
             return View(korisnik);
         }
 
+
+        /*
         // GET: Korisniks/Create
         public ActionResult Create()
         {
@@ -59,7 +72,7 @@ namespace RentACar.Controllers
 
             return View(korisnik);
         }
-
+        */
         // GET: Korisniks/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -91,6 +104,7 @@ namespace RentACar.Controllers
             return View(korisnik);
         }
 
+        [Authorize(Roles = "Administrator")]
         // GET: Korisniks/Delete/5
         public ActionResult Delete(int? id)
         {

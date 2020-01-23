@@ -67,7 +67,11 @@
 </table>
 
 
-@Html.ActionLink("Резервирај", "CreateForVozilo", "Rezervacijas", new { id = ViewBag.voziloId }, new { })  <br /> <br />
+@if (!User.IsInRole("Owner") && !User.IsInRole("Administrator"))
+{
+    @Html.ActionLink("Резервирај", "CreateForVozilo", "Rezervacijas", new { id = ViewBag.voziloId }, new { });
+}
+<br /> <br />
 @Html.ActionLink("Врати се назад", "Details", "Voziloes", new { id = ViewBag.voziloId }, new { }) <br /> <br />
 @Html.ActionLink("Назад кон возила", "Index", "Voziloes")
 

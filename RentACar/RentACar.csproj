@@ -540,6 +540,7 @@
     <Content Include="Views\Kategorijas\PrikaziVozilaKategorija.cshtml" />
     <Content Include="Views\Rezervacijas\ShowRezervationForVozilo.cshtml" />
     <Content Include="Views\Proizvoditels\PrikaziVozilaProizvoditel.cshtml" />
+    <Content Include="Views\Sopstveniks\PrikaziVozilaSopstvenik.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

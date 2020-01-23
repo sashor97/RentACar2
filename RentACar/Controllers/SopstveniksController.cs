@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using RentACar.Models;
 
 namespace RentACar.Controllers
@@ -17,7 +18,16 @@ namespace RentACar.Controllers
         // GET: Sopstveniks
         public ActionResult Index()
         {
-            return View(db.Sopstvenici.ToList());
+            if (User.IsInRole("Owner"))
+            {
+                string email = User.Identity.GetUserName();
+                var sopstvenikId = db.Sopstvenici.Where(s => s.email == email).FirstOrDefault().SopstvenikId;
+
+                var sopstvenik = db.Sopstvenici.Where(s => s.SopstvenikId == sopstvenikId);
+
+                return View(sopstvenik.ToList());
+            }
+            return View(db.Sopstvenici.Include(s=>s.Vozila).ToList());
         }
 
         // GET: Sopstveniks/Details/5
@@ -35,6 +45,7 @@ namespace RentACar.Controllers
             return View(sopstvenik);
         }
 
+        /*
         [Authorize(Roles = "Administrator, Owner")]
         // GET: Sopstveniks/Create
         public ActionResult Create()
@@ -58,6 +69,27 @@ namespace RentACar.Controllers
 
             return View(sopstvenik);
         }
+        */
+
+        [Authorize(Roles ="User,Admin")]
+        public ActionResult PrikaziVozilaSopstvenik(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Sopstvenik sopstvenik = db.Sopstvenici.Include(k => k.Vozila).Where(k => k.SopstvenikId == id).First();
+            if (sopstvenik == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(sopstvenik);
+        }
+
+
+
 
         [Authorize(Roles = "Administrator, Owner")]
         // GET: Sopstveniks/Edit/5

@@ -4,14 +4,17 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+@if (User.IsInRole("Owner"))
+{
+    <h2>Лични податоци</h2>
+}
+else
+{
+    <h2>Сопственици</h2>
+}
+
 
 <p>
-    @if (User.IsInRole("Administrator") || User.IsInRole("Owner"))
-    {
-        @Html.ActionLink("Create New", "Create")
-    }
-    
 </p>
 <table id="tabela" class="table">
     <thead>
@@ -28,51 +31,72 @@
             <th>
                 @Html.DisplayNameFor(model => model.Age)
             </th>
-            <th>Емаил</th><th>Опции</th><th>Возила</th>
-        </tr>
-     </thead>
+            <th>Емаил</th>
+            <th>Опции</th>
 
-    <tbody>
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Address)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Age)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.email)
-        </td>
-        <td>
-            @if (User.IsInRole("Administrator"))
+            @if (!User.IsInRole("Owner"))
             {
-                @Html.ActionLink("Edit", "Edit", new { id = item.SopstvenikId }) <span> | </span>
-                @Html.ActionLink("Delete", "Delete", new { id = item.SopstvenikId }) <span> | </span>
+                <td><b>Возила</b></td>
+
             }
 
-            @Html.ActionLink("Details", "Details", new { id = item.SopstvenikId })
-        </td>
+        </tr>
+    </thead>
 
-        <td>Link Види возила</td>
-    </tr>
-}
-        </tbody>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Age)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.email)
+                </td>
+                <td>
+                    @if (User.IsInRole("Administrator"))
+                    {
+
+                        @Html.ActionLink("Delete", "Delete", new { id = item.SopstvenikId }) <span> | </span>
+                    }
+
+                    @if (User.IsInRole("Administrator") || User.IsInRole("Owner"))
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.SopstvenikId }) <span> | </span>
+                    }
+
+                    @Html.ActionLink("Details", "Details", new { id = item.SopstvenikId })
+                </td>
+
+
+                @if (!User.IsInRole("Owner"))
+                {
+                    <td><a href="/Sopstveniks/PrikaziVozilaSopstvenik?id=@item.SopstvenikId">Види возила(@item.Vozila.Count().ToString())</a></td>
+
+                }
+
+
+            </tr>
+        }
+    </tbody>
 
 </table>
 
 @section Scripts{
-    
+
     <script>
         $(document).ready(function () {
             $("#tabela").DataTable();
         });
     </script>
-    
-    }
+
+}

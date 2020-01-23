@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Категории</h2>
 
 <p>
     @if (User.IsInRole("Administrator"))
@@ -33,8 +33,13 @@
         {
             <tr>
                 <td>
+                    @if(User.IsInRole("Owner")){
+                    <a href="/Kategorijas/PrikaziVozilaKategorija/@item.KategorijaId">@item.Name (@item.Vozila.Where(v => v.SopstvenikId == ViewBag.SopstvenikId).Count().ToString())</a>
+                    }
+                    else{
+                    <a href="/Kategorijas/PrikaziVozilaKategorija/@item.KategorijaId">@item.Name (@item.Vozila.Count.ToString())</a>
+                    }
 
-                    <a href="/Kategorijas/PrikaziVozilaKategorija/@item.KategorijaId">@item.Name: (@item.Vozila.Count.ToString())</a>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Type)

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using RentACar.Models;
 
 namespace RentACar.Controllers
@@ -17,6 +18,14 @@ namespace RentACar.Controllers
         // GET: Kategorijas
         public ActionResult Index()
         {
+            if (User.IsInRole("Owner"))
+            {
+                string email = User.Identity.GetUserName();
+                var sopstvenikId = db.Sopstvenici.Where(s => s.email == email).FirstOrDefault().SopstvenikId;
+
+                ViewBag.SopstvenikId = sopstvenikId;
+            }
+           
             
             return View(db.Kategorii.Include(k => k.Vozila).ToList());
         }
@@ -41,6 +50,15 @@ namespace RentACar.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+            if (User.IsInRole("Owner"))
+            {
+                string email = User.Identity.GetUserName();
+                var sopstvenikId = db.Sopstvenici.Where(s => s.email == email).FirstOrDefault().SopstvenikId;
+
+                ViewBag.SopstvenikId = sopstvenikId;
+            }
+
             Kategorija kategorija = db.Kategorii.Include(k => k.Vozila).Where(k => k.KategorijaId == id).First();
             if(kategorija==null)
             {

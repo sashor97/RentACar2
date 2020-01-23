@@ -2,10 +2,12 @@
 @{
     ViewBag.Title = "Index";
 }
-<h2>Index</h2>
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<h2>Коментари</h2>
+@*
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+*@
 <table id="tabela" class="table">
     <thead>
         <tr>
@@ -21,7 +23,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Rating)
             </th>
-            <th></th>
+            <th><b>Опции</b></th>
         </tr>
     </thead>
     <tbody>

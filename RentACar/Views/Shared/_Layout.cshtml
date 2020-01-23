@@ -18,7 +18,10 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
+                @if(!User.IsInRole("User")){
+                
                 @Html.ActionLink("Rent-A-Car", "Index", "Voziloes", new { area = "" }, new { @class = "navbar-brand" })
+                }
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -38,7 +41,11 @@
 
                     <li>@Html.ActionLink("Производители", "Index", "Proizvoditels")</li>
 
-                    <li>@Html.ActionLink("Сопственици", "Index", "Sopstveniks")</li>
+                    @if (!User.IsInRole("Owner"))
+                    {
+                        <li>@Html.ActionLink("Сопственици", "Index", "Sopstveniks")</li>
+                    }
+
 
                     @if (User.IsInRole("Administrator") || User.IsInRole("Owner"))
                     {
@@ -50,6 +57,10 @@
                         <li>@Html.ActionLink("Мои резервации", "Index", "Rezervacijas")</li>
                     }
 
+                    @if (User.IsInRole("Owner"))
+                    {
+                        <li>@Html.ActionLink("Лични податоци", "Index", "Sopstveniks")</li>
+                    }
 
                     @if (User.IsInRole("Administrator"))
                     {
@@ -66,12 +77,17 @@
                         <li>@Html.ActionLink("Мои коментари", "Index", "Komentars")</li>
                     }
 
+                    @if (User.IsInRole("User"))
+                    {
+                        <li>@Html.ActionLink("Лични податоци", "Index", "Korisniks")</li>
+                    }
+
 
                     @*
-                        @if (User.IsInRole("Administrator"))
-                        {
-                            <li>@Html.ActionLink("Додај пермисии", "AddUserToRole", "Account")</li>
-                        }
+        @if (User.IsInRole("Administrator"))
+        {
+            <li>@Html.ActionLink("Додај пермисии", "AddUserToRole", "Account")</li>
+        }
                     *@
 
 

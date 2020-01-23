@@ -23,7 +23,7 @@ namespace RentACar.Controllers
         {
         }
 
-       // [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Administrator")]
         public ActionResult AddUserToRole()
         {
             AddToRoleModel model = new AddToRoleModel();

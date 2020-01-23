@@ -4,11 +4,17 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+@if (User.IsInRole("User"))
+{
+    <h2>Лични податоци</h2>
+}
+else
+{
+    <h2>Корисници</h2>
+}
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
+
 <table id="tabela" class="table">
     <thead>
         <tr>
@@ -27,7 +33,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.email)
             </th>
-            <th></th>
+            <th><b>Опции</b></th>
         </tr>
     </thead>
 
@@ -54,7 +60,11 @@
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.KorisnikId }) |
                     @Html.ActionLink("Details", "Details", new { id = item.KorisnikId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.KorisnikId })
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        @Html.ActionLink("Delete", "Delete", new { id = item.KorisnikId })
+                    }
+
                 </td>
             </tr>
         }

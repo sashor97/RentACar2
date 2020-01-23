@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Производители</h2>
 
 <p>
     @if (User.IsInRole("Administrator"))
@@ -30,8 +30,16 @@
         {
             <tr>
                 <td>
-                    <a href="/Proizvoditels/PrikaziVozilaProizvoditel/@item.ProizvoditelId">@item.Name: (@item.Vozila.Count.ToString())</a>
-                    
+                    @if (User.IsInRole("Owner"))
+                    {
+                    <a href="/Proizvoditels/PrikaziVozilaProizvoditel/@item.ProizvoditelId">@item.Name (@item.Vozila.Where(v => v.SopstvenikId == ViewBag.SopstvenikId).Count().ToString())</a>
+                    }
+                    else
+                    {
+                        <a href="/Proizvoditels/PrikaziVozilaProizvoditel/@item.ProizvoditelId">@item.Name (@item.Vozila.Count.ToString())</a>
+                    }
+
+
                 </td>
 
                 <td>
