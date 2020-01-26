@@ -25,7 +25,7 @@ namespace RentACar.Models
 
         [Required(ErrorMessage = "Адресата е задолжителна")]
         //[RegularExpression(@"^[a-zA-Z]{2,20} \d{1,4}$", ErrorMessage = "ИмеАдреса број е правилниот формат кој треба да го внесете")]
-        [Display(Name = "Адреса на сопственикот")]
+        [Display(Name = "Адреса на Корисник")]
         public string Address { get; set; }
 
         [Required(ErrorMessage = "Годините се задолжителни")]
