@@ -21,11 +21,11 @@ namespace RentACar.Controllers
             if (User.IsInRole("Owner"))
             {
                 string email = User.Identity.GetUserName();
-                var sopstvenikId = db.Sopstvenici.Where(s => s.email == email).FirstOrDefault().SopstvenikId;
+                var SopstvenikId = db.Sopstvenici.Where(s => s.email == email).FirstOrDefault().SopstvenikId;
+                return RedirectToAction("Details", new { id=SopstvenikId });
+                //var sopstvenik = db.sopstvenici.where(s => s.sopstvenikid == sopstvenikid);
 
-                var sopstvenik = db.Sopstvenici.Where(s => s.SopstvenikId == sopstvenikId);
-
-                return View(sopstvenik.ToList());
+                //return view(sopstvenik.tolist());
             }
             return View(db.Sopstvenici.Include(s=>s.Vozila).ToList());
         }

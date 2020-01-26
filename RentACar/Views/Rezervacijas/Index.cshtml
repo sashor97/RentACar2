@@ -9,44 +9,52 @@
 <table id="tabela" class="table">
 
     <thead>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Korisnik.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Vozilo.ModelName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.denoviIznajmuvanje)
-        </th>
+        <tr>
+            @if (!User.IsInRole("User"))
+            {
+                <th>
+                    @Html.DisplayNameFor(model => model.Korisnik.Name)
+                </th>
+            }
+            <th>
+                @Html.DisplayNameFor(model => model.Vozilo.ModelName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.denoviIznajmuvanje)
+            </th>
 
-        <th>
-            @Html.DisplayNameFor(model => model.total)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DateFrom)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DateTo)
-        </th>
-        <th>Опции</th>
-    </tr>
+            <th>
+                @Html.DisplayNameFor(model => model.total)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateFrom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateTo)
+            </th>
+            @if (User.IsInRole("User") || User.IsInRole("Owner"))
+            {
+                <th>Опции</th>
+            }
+        </tr>
         </thead>
 
     <tbody>
 
     @foreach (var item in Model)
     {
-        <!-- if (item.KorisnikId == ViewBag.KorisnikId)
-         {
-            -->
 
         <tr>
+            @if (!User.IsInRole("User"))
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.Korisnik.Name)
+                </td>
+            }
             <td>
-                @Html.DisplayFor(modelItem => item.Korisnik.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Vozilo.ModelName)
+                <a href="/Voziloes/Details/@item.VoziloId">
+                    @Html.DisplayFor(modelItem => item.Vozilo.ModelName)
+                </a>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.denoviIznajmuvanje)
@@ -61,15 +69,26 @@
             <td>
                 @Html.DisplayFor(modelItem => item.DateTo)
             </td>
-            <td>
-                @if (User.IsInRole("User") || User.IsInRole("Owner"))
-                {
-                    @Html.ActionLink("Edit", "Edit", new { id = item.RezervacijaId }) <span> | </span>
-                    @Html.ActionLink("Delete", "Delete", new { id = item.RezervacijaId }) <span> | </span>
-                    @Html.ActionLink("Details", "Details", new { id = item.RezervacijaId })
-                }
-
-            </td>
+            @if (User.IsInRole("User") || User.IsInRole("Owner"))
+            {
+        <td>
+            <a href="/Rezervacijas/Edit/@item.RezervacijaId">
+                <button class="btn btn-primary m-2">
+                    Промени
+                </button>
+            </a>
+            <a href="/Rezervacijas/Details/@item.RezervacijaId">
+                <button class="btn btn-primary m-2">
+                    Детали
+                </button>
+            </a>
+            <a href="/Rezervacijas/Delete/@item.RezervacijaId">
+                <button class="btn btn-danger m-2">
+                    Избриши
+                </button>
+            </a>
+        </td>
+            }
         </tr>
 
         <!--}-->

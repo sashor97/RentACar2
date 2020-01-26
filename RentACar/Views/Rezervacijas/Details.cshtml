@@ -9,63 +9,75 @@
 <div>
     
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Korisnik.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Korisnik.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Vozilo.ModelName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Vozilo.ModelName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.denoviIznajmuvanje)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.denoviIznajmuvanje)
-        </dd>
 
 
-        <dt>
-            @Html.DisplayNameFor(model => model.total)
-        </dt>
+    <div class="border rounded bg-light">
+        <div class="row mr-3 p-3">
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-lg-3">
+                        @Html.DisplayNameFor(model => model.Korisnik.Name)
+                    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.total)
-        </dd>
+                    <div class="col-lg-3">
+                        @Html.DisplayFor(model => model.Korisnik.Name)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3">
+                        @Html.DisplayNameFor(model => model.Vozilo.ModelName)
+                    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DateFrom)
-        </dt>
+                    <div class="col-lg-3">
+                        @Html.DisplayFor(model => model.Vozilo.ModelName)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3">
+                        @Html.DisplayNameFor(model => model.denoviIznajmuvanje)
+                    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.DateFrom)
-        </dd>
+                    <div class="col-lg-3">
+                        @Html.DisplayFor(model => model.denoviIznajmuvanje)
+                    </div>
+                </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DateTo)
-        </dt>
+                <div class="row">
+                    <div class="col-lg-3">
+                        @Html.DisplayNameFor(model => model.total)
+                    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.DateTo)
-        </dd>
+                    <div class="col-lg-3">
+                        @Html.DisplayFor(model => model.total)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3">
+                        @Html.DisplayNameFor(model => model.DateFrom)
+                    </div>
 
-    </dl>
+                    <div class="col-lg-3">
+                        @Html.DisplayFor(model => model.DateFrom)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3">
+                        @Html.DisplayNameFor(model => model.DateTo)
+                    </div>
+
+                    <div class="col-lg-3">
+                        @Html.DisplayFor(model => model.DateTo)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <p>
     @if (User.IsInRole("User") || User.IsInRole("Owner"))
     {
-        @Html.ActionLink("Edit", "Edit", new { id = Model.RezervacijaId })  <span> | </span>
+        @Html.ActionLink("Промени", "Edit", new { id = Model.RezervacijaId })  <span> | </span>
     }
 
-@Html.ActionLink("Back to List", "Index")
+@Html.ActionLink("Назад кон листата", "Index")
 </p>

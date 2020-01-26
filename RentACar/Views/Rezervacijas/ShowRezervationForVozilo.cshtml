@@ -22,8 +22,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.DateTo)
             </th>
-            <th></th>
-        </tr>
+            </tr>
     </thead>
 
     <tbody>
@@ -47,15 +46,6 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.DateTo)
-                </td>
-                <td>
-                    @if (User.IsInRole("User") || User.IsInRole("Owner"))
-                    {
-                        @Html.ActionLink("Edit", "Edit", new { id = item.RezervacijaId }) <span> | </span>
-                        @Html.ActionLink("Delete", "Delete", new { id = item.RezervacijaId }) <span> | </span>
-                        @Html.ActionLink("Details", "Details", new { id = item.RezervacijaId })
-                    }
-
                 </td>
             </tr>
 

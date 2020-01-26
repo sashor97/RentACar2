@@ -33,9 +33,12 @@ namespace RentACar.Models
 
         public int KorisnikId { get; set; }
         public Korisnik Korisnik { get; set; }
-
+        
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         [Display(Name = "ДатумОд")]
         public DateTime DateFrom { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         [Display(Name = "ДатумДо")]
         public DateTime DateTo { get; set; }
 

@@ -6,52 +6,72 @@
 
 <h2>Details</h2>
 
-<div>
-    <h4>Sopstvenik</h4>
+<div class="container">
+    <h4>Сопственик</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+    <div class="container bg-light border rounded m-3 p-3">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <b>
+                    @Html.DisplayNameFor(model => model.Name)
+                </b>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+            <div class="col-lg-3 col-sm-6 col-md-6">
+                @Html.DisplayFor(model => model.Name)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <b>
+                    @Html.DisplayNameFor(model => model.LastName)
+                </b>
+            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                @Html.DisplayFor(model => model.LastName)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <b>
+                    @Html.DisplayNameFor(model => model.Address)
+                </b>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                @Html.DisplayFor(model => model.Address)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <b>
+                    @Html.DisplayNameFor(model => model.Age)
+                </b>
+            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Age)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Age)
-        </dd>
-        <dd>
-            @Html.DisplayFor(model => model.email)
-        </dd>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                @Html.DisplayFor(model => model.Age)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <b>
+                    @Html.DisplayNameFor(model => model.email)
+                </b>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                @Html.DisplayFor(model => model.email)
+            </div>
+        </div>
 
     </dl>
 </div>
 <p>
     @if (User.IsInRole("Administrator"))
-    {
-        @Html.ActionLink("Edit", "Edit", new { id = Model.SopstvenikId }) <span> | </span>
+{
+        @Html.ActionLink("Промени", "Edit", new { id = Model.SopstvenikId }) <span> | </span>
 }
 
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Назад кон листата", "Index")
 </p>

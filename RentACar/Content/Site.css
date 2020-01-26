@@ -1,6 +1,6 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    padding-top: 0px;
+    padding-bottom: 0px;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -21,4 +21,65 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+.m-3{
+    margin: 1rem;
+}
+.mr-3 {
+    margin-right: 1rem;
+}
+.mr-form-comment{
+    margin-right: 3.7rem !important;
+}
+
+.rounded {
+    border-radius: 0.25rem !important;
+}
+.bg-light {
+    background-color: #f8f9fa !important;
+}
+.border {
+    border: 1px solid #dee2e6 !important;
+}
+.border-left{
+    border-left: 1px solid #dee2e6;
+}
+.color-white{
+    color:white;
+}
+.m-2 {
+    margin: 0.5rem;
+}
+.m-1 {
+    margin: 0.25rem;
+}
+.p-0 {
+    padding: 0rem !important;
+}
+.p-2{
+    padding: 0.5rem !important;
+}
+.p-3{
+    padding: 1rem !important;
+}
+.mt-3{
+    margin-top: 1rem;
+}
+.ml-3 {
+    margin-left: 1rem;
+}
+.place-right{
+    float: right;
+}
+.d-flex{
+    display: flex;
+}
+.p-relative{
+    position: relative;
+}
+.bottom-right-absolute{
+    position: absolute;
+    bottom:0;
+    right:0;
 }

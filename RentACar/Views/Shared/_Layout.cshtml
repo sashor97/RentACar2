@@ -6,11 +6,9 @@
     <title>Rent-a-Car</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    
-
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-inverse navbar-static-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -18,10 +16,9 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @if(!User.IsInRole("User")){
-                
-                @Html.ActionLink("Rent-A-Car", "Index", "Voziloes", new { area = "" }, new { @class = "navbar-brand" })
-                }
+                <a href="/"><img src="https://st2.depositphotos.com/2703645/11876/v/950/depositphotos_118767294-stock-illustration-rent-a-car-logo.jpg" class="navbar-brand img-rounded p-0" /></a>
+                @*@Html.ActionLink("Rent-A-Car", "Index", "Voziloes", new { area = "" }, new { @class = "navbar-brand" })*@
+
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">

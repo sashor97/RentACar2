@@ -6,80 +6,178 @@
 
 <h2>Детали за @Model.ModelName</h2>
 
-<div>
+<div class="border rounded">
 
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Kategorija.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Kategorija.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Proizvoditel.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Proizvoditel.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ModelName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ModelName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ImageUrl)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ImageUrl)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Location)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Location)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Sopstvenik.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Sopstvenik.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.PriceDay)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.PriceDay)
-        </dd>
-    </dl>
-</div>
-
-
-@Html.ActionLink("Прикажи резервации за возилото", "ShowRezervationForVozilo", "Rezervacijas", new { id = Model.VoziloId }, new { }) <br /> <br />
-
-@if (User.IsInRole("User"))
-{
-@Html.ActionLink("Резервирај", "CreateForVozilo", "Rezervacijas", new { id = Model.VoziloId }, new { }) <br /> <br />
-
-
-
-
-
-<a href="/Komentars/DodadiKomentarZaVozilo/@Model.VoziloId"><h5>Додај коментар</h5></a>
-}
-<br />
-<h4>Коментари</h4>
-<div>
-
-    @foreach (var k in Model.Komentari)
-    {
-        <div>
-            <span>Опис: @k.Description</span> <br />
-            <span>Рејтинг: @k.Rating</span> <br /><br />
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <img src="@Model.ImageUrl" class="img-thumbnail" style="width: 80%;" />
+            </div>
         </div>
+        <div class="row ml-3">
+            <div class="row">
+                <div class="col-lg-12">
+                    Цена: @Model.PriceDay МКД
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    Локација: @Model.Location
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    Категорија: @Model.Kategorija.Name
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    Производител: @Model.Proizvoditel.Name
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    Модел: @Model.ModelName
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    Сопственик: @Model.Sopstvenik.Name @Model.Sopstvenik.LastName
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <a href="/Rezervacijas/ShowRezervationForVozilo/@Model.VoziloId">
+                        <button class="btn btn-primary m-2">
+                            Прикажи резервации за возилото
+                        </button>
+                    </a>
+                    @*@Html.ActionLink("Прикажи резервации за возилото", "ShowRezervationForVozilo", "Rezervacijas", new { id = Model.VoziloId }, new { @class  }) <br /> <br />*@
+                    @if (User.IsInRole("User"))
+                    {
+                        <a href="/Rezervacijas/CreateForVozilo/@Model.VoziloId">
+                            <button class="btn btn-primary m-2">
+                                Резервирај
+                            </button>
+                        </a>
+
+                    }
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<br />
+@for (var i = 0; i < 10; i++)
+{
+    if (i+1 < ViewBag.averageRating)
+    {
+        <i><span class="fa fa-star"></span></i>
     }
+    else if (i+1 > ViewBag.averageRating && i < ViewBag.averageRating)
+    {
+        <i><span class="fa fa-star-half-o"></span></i>
+    }
+    else
+    {
+        <i><span class="fa fa-star-o"></span></i>
+    }
+}
+<h4>Коментари</h4>
+<div class="border rounded">
+    <div class="container mr-3">
+        @if (User.IsInRole("User"))
+        {
+            <form class="form-group bg-light rounded border m-2 mr-form-comment p-3" action="/Komentars/DodadiKomentarZaVozilo/@Model.VoziloId" method="post">
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <label><i class="ml-3 fa fa-comment-o"> Нов коментар:</i></label>
+                <div class="row">
+                    <div class="form-group col-lg-3 col-md-3">
+                        <div class="row ml-3">
+                            <label class="control-label col-md-3" for="Rating">Rating</label>
+                            <div class="col-md-6">
+                                <select class="form-control text-box single-line" data-val="true" data-val-number="The field Rating must be a number." data-val-required="The Rating field is required." id="Rating" name="Rating" type="text" value="">
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                                <span class="field-validation-valid text-danger" data-valmsg-for="Rating" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                        <div class="row m-3">
+                            <div class="col-lg-12">
+                                <button class="btn btn-primary mb-2"><i class="fa fa-mail-reply"> Коментирај</i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-9 col-md-9 col-sm-12">
+                        <label class="control-label col-md-2" for="Description">Description</label>
+                        <textarea class="form-control text-box mb-2" id="Description" name="Description"></textarea>
+                        <span class="field-validation-valid text-danger" data-valmsg-for="Description" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+
+                <div class="form-group" style="display:none">
+                    <label class="control-label col-md-2" for="VoziloId">VoziloId</label>
+                    <div class="col-md-10">
+                        <select class="form-control" id="VoziloId" name="VoziloId">
+                            <option>@Model.VoziloId</option>
+                        </select>
+                        <span class="field-validation-valid text-danger" data-valmsg-for="VoziloId" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+
+
+            </form>
+        }
+
+        @foreach (var k in Model.Komentari)
+        {
+            <div class="row bg-light border rounded m-2  mr-form-comment">
+                <div class="col-lg-12 mt-3">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            @k.Korisnik.Name @k.Korisnik.LastName
+                        </div>
+                        <div class="col-lg-6">
+                            <span>
+                                Рејтинг: <br />
+                                <div>
+                                    @for (var i = 0; i < 10; i++)
+                                    {
+                                        if (i < k.Rating)
+                                        {
+                                            <i><span class="fa fa-star"></span></i>
+                                        }
+                                        else
+                                        {
+                                            <i><span class="fa fa-star-o"></span></i>
+                                        }
+
+                                    }
+                                    @k.Rating
+                                </div>
+                            </span>
+                        </div>
+                    </div>
+                    <span>@k.Description</span> <br />
+                    <br />
+                </div>
+            </div>
+        }
+    </div>
 
 </div>
 
@@ -91,5 +189,8 @@
         }
     *@
 
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Назад кон сите автомобили", "Index")
 </p>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

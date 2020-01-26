@@ -29,6 +29,9 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.KategorijaId }) |
-    @Html.ActionLink("Back to List", "Index")
+    @if (User.IsInRole("Administrator"))
+    {
+        @Html.ActionLink("Промени", "Edit", new { id = Model.KategorijaId }) <span> | </span>
+    }
+    @Html.ActionLink("Назад кон листата со категории", "Index")
 </p>

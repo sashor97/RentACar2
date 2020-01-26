@@ -82,18 +82,18 @@ namespace RentACar.Models
 
         [Required(ErrorMessage = "Името е задолжително")]
         [StringLength(12, ErrorMessage = "Максималната големина на името треба да е 12 карактери")]
-        [Display(Name = "Име на Сопственик")]
+        [Display(Name = "Име")]
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Презимето е задолжително")]
         [StringLength(20, ErrorMessage = "Максималната големина на презимето треба да е 20 карактери")]
-        [Display(Name = "Презиме на Сопственик")]
+        [Display(Name = "Презиме")]
         public string LastName { get; set; }
 
 
         [Required(ErrorMessage = "Адресата е задолжителна")]
         //[RegularExpression(@"^[a-zA-Z]{2,20} \d{1,4}$", ErrorMessage = "ИмеАдреса број е правилниот формат кој треба да го внесете")]
-        [Display(Name = "Адреса на сопственикот")]
+        [Display(Name = "Адреса")]
         public string Address { get; set; }
 
 
@@ -104,6 +104,7 @@ namespace RentACar.Models
 
         public List<string> types { get; set; }
 
+        [Display(Name = "Тип на корисник")]
         public string type { get; set; }
 
         public RegisterViewModel()

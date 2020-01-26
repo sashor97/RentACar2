@@ -23,8 +23,8 @@
 <p>
     @if (User.IsInRole("Administrator"))
     {
-        @Html.ActionLink("Edit", "Edit", new { id = Model.ProizvoditelId }) <span> | </span>
+        @Html.ActionLink("Промени", "Edit", new { id = Model.ProizvoditelId }) <span> | </span>
     }
     
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Назад кон листата со производители", "Index")
 </p>

@@ -9,7 +9,7 @@
 <p>
     @if (User.IsInRole("Administrator"))
     {
-        @Html.ActionLink("Create New", "Create");
+        @Html.ActionLink("Додај нов производител", "Create");
     }
 
 </p>
@@ -19,8 +19,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
-
-            <th></th>
+             
+            <th>Опции</th>
+            
         </tr>
     </thead>
 
@@ -43,15 +44,24 @@
                 </td>
 
                 <td>
+                    <a href="/Proizvoditels/Details/@item.ProizvoditelId">
+                        <button class="btn btn-primary m-2">
+                            Детали
+                        </button>
+                    </a>
                     @if (User.IsInRole("Administrator"))
                     {
-                        @Html.ActionLink("Edit", "Edit", new { id = item.ProizvoditelId }) <span> | </span>
-
-                        @Html.ActionLink("Delete", "Delete", new { id = item.ProizvoditelId }) <span> | </span>
+                        <a href="/Proizvoditels/Edit/@item.ProizvoditelId">
+                            <button class="btn btn-primary m-2">
+                                Промени
+                            </button>
+                        </a>
+                        <a href="/Proizvoditels/Delete/@item.ProizvoditelId">
+                            <button class="btn btn-danger m-2">
+                                Избриши
+                            </button>
+                        </a>
                     }
-
-
-                    @Html.ActionLink("Details", "Details", new { id = item.ProizvoditelId })
                 </td>
             </tr>
         }
