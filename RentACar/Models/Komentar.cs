@@ -12,7 +12,7 @@ namespace RentACar.Models
         public int SopstvenikId { get; set; }
 
         [Required(ErrorMessage = "Коментарот е задолжителен")]
-        [StringLength(15, ErrorMessage = "Максималната големина на описот треба да е 15 карактери")]
+        [StringLength(100, ErrorMessage = "Максималната големина на описот треба да е 15 карактери")]
         [Display(Name = "Опис на коментарот")]
         public string Description { get; set; }
 
