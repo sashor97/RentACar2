@@ -15,3 +15,7 @@
 /packages/Microsoft.AspNet.WebPages.3.2.4
 /packages/Microsoft.jQuery.Unobtrusive.Validation.3.2.4
 /packages
+/RentACar/bin/roslyn
+/RentACar/obj/Debug/Tsc.out
+/RentACar/obj/Debug/RentACar.Migrations.removeYearProizvoditel.resources
+/RentACar/obj/Debug/RentACar.Migrations.addRegularExpressEmail_andEmailtoSopsvenik.resources
