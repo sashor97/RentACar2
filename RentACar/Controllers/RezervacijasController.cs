@@ -36,9 +36,6 @@ namespace RentACar.Controllers
             ViewBag.voziloId = id;
 
             return View(rezervacii.ToList());
-
-            
-
         }
 
 
@@ -185,7 +182,7 @@ namespace RentACar.Controllers
 
 
                 ViewBag.VoziloId = new SelectList(ids);
-                ViewBag.Poraka = "Nemoze da se rezervira vo minatoto!!!";
+                ViewBag.Poraka = "Неможе да се резервира во минатото!!!";
 
                 return View();
             }
@@ -197,7 +194,7 @@ namespace RentACar.Controllers
 
 
                 ViewBag.VoziloId = new SelectList(ids);
-                ViewBag.Poraka = "Krajniot datum (DateTo) treba da bide pogolem od pocetniot datum (DateFrom)!!!";
+                ViewBag.Poraka = "Крајниот датум (Датум До) треба да биде поголем од почетниот датум (Датум Од)!!!";
 
                 return View();
             }
@@ -223,7 +220,7 @@ namespace RentACar.Controllers
 
 
                     ViewBag.VoziloId = new SelectList(ids);
-                    ViewBag.Poraka = "Veke postoi rezervacija za vneseniot termin";
+                    ViewBag.Poraka = "Веќе постои резервација за внесениот термин!!!";
 
                     return View();
                 }
@@ -238,7 +235,7 @@ namespace RentACar.Controllers
 
 
                     ViewBag.VoziloId = new SelectList(ids);
-                    ViewBag.Poraka = "Veke postoi rezervacija za vneseniot termin";
+                    ViewBag.Poraka = "Веќе постои резервација за внесениот термин!!!";
 
                     return View();
                 }
@@ -253,7 +250,7 @@ namespace RentACar.Controllers
 
 
                     ViewBag.VoziloId = new SelectList(ids);
-                    ViewBag.Poraka = "Veke postoi rezervacija za vneseniot termin";
+                    ViewBag.Poraka = "Веќе постои резервација за внесениот термин!!!";
 
                     return View();
                 }

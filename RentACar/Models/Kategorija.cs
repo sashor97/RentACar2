@@ -18,7 +18,7 @@ namespace RentACar.Models
 
 
         [Display(Name = "Тип")]
-        [RegularExpression(@"(B|C|D)",ErrorMessage ="Внеси категорија од тип B,C или D")]
+        [RegularExpression(@"(A|B|C|D)",ErrorMessage ="Внеси категорија од тип B,C или D")]
         public string Type { get; set; }
 
         public List<Vozilo> Vozila { get; set; }

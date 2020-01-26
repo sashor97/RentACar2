@@ -31,7 +31,7 @@ else
                 <p>
                     @if (User.IsInRole("Administrator"))
                     {
-                        <a href="Sopstvenik/Delete/@item.SopstvenikId">
+                        <a href="Sopstveniks/Delete/@item.SopstvenikId">
                             <button class="btn btn-danger m-2">
                                 Избриши
                             </button>
@@ -39,7 +39,7 @@ else
                     }
                     @if (User.IsInRole("Administrator") || User.IsInRole("Owner"))
                     {
-                <a href="Sopstvenik/Edit/@item.SopstvenikId">
+                <a href="Sopstveniks/Edit/@item.SopstvenikId">
                     <button class="btn btn-primary m-2">
                         Промени
                     </button>

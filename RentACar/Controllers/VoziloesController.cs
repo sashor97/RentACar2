@@ -112,8 +112,12 @@ namespace RentACar.Controllers
             {
                 return HttpNotFound();
             }
-            double averageRating=vozilo.Komentari.Select(k => k.Rating).ToList().Average();
-            ViewBag.averageRating = averageRating;
+            var ratingList = vozilo.Komentari.Select(k => k.Rating).ToList();
+            ViewBag.averageRating = 0;
+            if (ratingList.Count > 0)
+            {
+                ViewBag.averageRating = ratingList.Average();
+            }
             return View(vozilo);
         }
 
@@ -123,7 +127,16 @@ namespace RentACar.Controllers
         {
             ViewBag.KategorijaId = new SelectList(db.Kategorii, "KategorijaId", "Name");
             ViewBag.ProizvoditelId = new SelectList(db.Proizvoditeli, "ProizvoditelId", "Name");
-            ViewBag.SopstvenikId = new SelectList(db.Sopstvenici, "SopstvenikId", "Name");
+            if (User.IsInRole("Owner"))
+            {
+                string email = User.Identity.GetUserName();
+                var Sopstvenik = db.Sopstvenici.Where(k => k.email == email).FirstOrDefault();
+                ViewBag.SopstvenikId = Sopstvenik.SopstvenikId;
+            }
+            else
+            {
+                ViewBag.SopstvenikId = new SelectList(db.Sopstvenici, "SopstvenikId", "Name");
+            }
             return View();
         }
 
@@ -143,7 +156,16 @@ namespace RentACar.Controllers
 
             ViewBag.KategorijaId = new SelectList(db.Kategorii, "KategorijaId", "Name", vozilo.KategorijaId);
             ViewBag.ProizvoditelId = new SelectList(db.Proizvoditeli, "ProizvoditelId", "Name", vozilo.ProizvoditelId);
-            ViewBag.SopstvenikId = new SelectList(db.Sopstvenici, "SopstvenikId", "Name", vozilo.SopstvenikId);
+            if (User.IsInRole("Owner"))
+            {
+                string email = User.Identity.GetUserName();
+                var Sopstvenik = db.Sopstvenici.Where(k => k.email == email).FirstOrDefault();
+                ViewBag.SopstvenikId = Sopstvenik.SopstvenikId;
+            }
+            else
+            {
+                ViewBag.SopstvenikId = new SelectList(db.Sopstvenici, "SopstvenikId", "Name", vozilo.SopstvenikId);
+            }
             return View(vozilo);
         }
 
