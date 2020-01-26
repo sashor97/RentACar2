@@ -3,9 +3,6 @@
 @{
     ViewBag.Title = "Details";
 }
-
-<h2>Details</h2>
-
 <div class="container">
     <h4>Сопственик</h4>
     <hr />
@@ -68,7 +65,7 @@
     </dl>
 </div>
 <p>
-    @if (User.IsInRole("Administrator"))
+    @if (User.IsInRole("Administrator") || User.IsInRole("Owner"))
 {
         @Html.ActionLink("Промени", "Edit", new { id = Model.SopstvenikId }) <span> | </span>
 }

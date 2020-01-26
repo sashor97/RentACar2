@@ -31,8 +31,8 @@ namespace RentACar.Controllers
                 }
                 if (sortNumber.HasValue)
                 {
-                    var vozilaSorted = db.Vozila.Include(v => v.Kategorija).Include(v => v.Proizvoditel).Include(v => v.Sopstvenik).Where(v => v.SopstvenikId == Sopstvenici.SopstvenikId).OrderBy(x=>x.PriceDay);
-                    return View(sort(db,sortNumber));
+                    var vozilaOwner = db.Vozila.Include(v => v.Kategorija).Include(v => v.Proizvoditel).Include(v => v.Sopstvenik).Where(v => v.SopstvenikId == Sopstvenici.SopstvenikId);
+                    return View(sort(vozilaOwner,sortNumber));
                 }
                 var vozila = db.Vozila.Include(v => v.Kategorija).Include(v => v.Proizvoditel).Include(v => v.Sopstvenik).Where(v => v.SopstvenikId == Sopstvenici.SopstvenikId);
                 return View(vozila.ToList());
@@ -41,13 +41,43 @@ namespace RentACar.Controllers
             {
                 if (sortNumber.HasValue)
                 {
-                    //sort(db, sortNumber);
-                    //var vozilaSorted = db.Vozila.Include(v => v.Kategorija).Include(v => v.Proizvoditel).Include(v => v.Sopstvenik).OrderBy(x => x.PriceDay);
-                    return View(sort(db,sortNumber));
+                   return View(sort(db,sortNumber));
                 }
                 var vozila = db.Vozila.Include(v => v.Kategorija).Include(v => v.Proizvoditel).Include(v => v.Sopstvenik);
                 return View(vozila.ToList());
              }
+        }
+
+        private object sort(IQueryable<Vozilo> vozilaOwner, int? sortNumber)
+        {
+            switch (sortNumber)
+            {
+                case 1:
+                    return vozilaOwner
+                        .OrderBy(x => x.PriceDay)
+                        .ToList();
+                case 2:
+                    return vozilaOwner
+                        .OrderByDescending(x => x.PriceDay)
+                        .ToList();
+                case 3:
+                    return vozilaOwner
+                        .OrderBy(x => x.Proizvoditel.Name)
+                        .ToList();
+                case 4:
+                    return vozilaOwner
+                        .OrderBy(x => x.ModelName)
+                        .ToList();
+
+                case 5:
+                    return vozilaOwner
+                        .OrderByDescending(x => x.Location)
+                        .ToList();
+                default:
+                    return vozilaOwner
+                        .ToList();
+            }
+
         }
 
         private List<Vozilo> sort(ApplicationDbContext db, int? sortNumber)
