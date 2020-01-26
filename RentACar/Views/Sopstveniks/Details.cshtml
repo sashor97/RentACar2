@@ -64,11 +64,17 @@
 
     </dl>
 </div>
-<p>
-    @if (User.IsInRole("Administrator") || User.IsInRole("Owner"))
-{
-        @Html.ActionLink("Промени", "Edit", new { id = Model.SopstvenikId }) <span> | </span>
-}
-
-    @Html.ActionLink("Назад кон листата", "Index")
-</p>
+    <p>
+        @if (User.IsInRole("Administrator") || User.IsInRole("Owner"))
+        {
+            @Html.ActionLink("Промени", "Edit", new { id = Model.SopstvenikId }) <span> | </span>
+        }
+        @if (User.IsInRole("Owner"))
+        {
+            @Html.ActionLink("Назад кон моите возила", "Index", "Voziloes")
+        }
+        else
+        {
+            @Html.ActionLink("Назад кон листата", "Index")
+        }
+    </p>
