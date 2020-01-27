@@ -21,4 +21,10 @@ Project for Internet Technologies
 2. trajko@gmail.com
 3. sara@gmail.com
 
+
+Шемата за базата е претставена на следната слика
 ![Database](database.png)
+
+Сашо Ристески 161043
+Антонио Славкоски 161152
+Методи Наков 161041
