@@ -71,7 +71,7 @@ namespace RentACar.Controllers
         }
         */
 
-        [Authorize(Roles ="User,Admin")]
+        [Authorize(Roles ="User,Administrator")]
         public ActionResult PrikaziVozilaSopstvenik(int? id)
         {
             if (id == null)
