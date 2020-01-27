@@ -4,7 +4,7 @@
     ViewBag.Title = "Delete";
 }
 
-<h3>Дали си сигурен дека сакаш да го избришеш овој корисник?</h3>
+<h2>Дали си сигурен дека сакаш да го избришеш овој корисник?</h2>
 <div>
     <hr />
     <dl class="dl-horizontal">
@@ -53,11 +53,9 @@
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-danger" />
-            <a href="/Korisniks">
-                <button class="btn btn-default">Откажи</button>
-            </a>
-        </div>
+    <div class="form-actions no-color">
+        <input type="submit" value="Избриши" class="btn btn-danger" />
+        @Html.ActionLink("Откажи", "Index")
+    </div>
     }
 </div>

@@ -245,7 +245,7 @@ namespace RentACar.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Vozilo vozilo = db.Vozila.Find(id);
+            Vozilo vozilo = db.Vozila.Include(v => v.Kategorija).Include(v => v.Proizvoditel).Include(v => v.Sopstvenik).Where(v => v.VoziloId == id).FirstOrDefault(); 
             if (vozilo == null)
             {
                 return HttpNotFound();

@@ -4,10 +4,9 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Детали за коментарот</h2>
 
 <div>
-    <h4>Komentar</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -45,6 +44,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.SopstvenikId }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Промени", "Edit", new { id = Model.SopstvenikId }) |
+    @Html.ActionLink("Назад", "Index")
 </p>
