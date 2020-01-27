@@ -97,10 +97,17 @@ namespace RentACar.Controllers
             string email = User.Identity.GetUserName();
             var korisnici = db.Korisnici.Where(k => k.email == email).First();
            komentar.KorisnikId = korisnici.KorisnikId;
+            if (komentar.Description == null)
+            {
+                return RedirectToAction("Details", "Voziloes", new { id = model.VoziloId });
+            }
+            else
+            {
 
-            db.Komentari.Add(komentar);
-            db.SaveChanges();
-            return RedirectToAction("Details","Voziloes", new { id = model.VoziloId});
+                db.Komentari.Add(komentar);
+                db.SaveChanges();
+                return RedirectToAction("Details", "Voziloes", new { id = model.VoziloId });
+            }
         }
 
             // GET: Komentars/Create
