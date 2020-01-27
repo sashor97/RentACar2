@@ -20,3 +20,5 @@ Project for Internet Technologies
 1. petar@gmail.com
 2. trajko@gmail.com
 3. sara@gmail.com
+
+![Database](database.png)
