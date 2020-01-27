@@ -305,6 +305,7 @@ namespace RentACar.Controllers
         }
 
 
+        /*
         // GET: Rezervacijas/Create
         public ActionResult Create()
         {
@@ -323,7 +324,7 @@ namespace RentACar.Controllers
 
             return View();
         }
-
+        */
         // POST: Rezervacijas/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -349,7 +350,7 @@ namespace RentACar.Controllers
             return View(rezervacija);
         }
 
-        [Authorize(Roles = "Administrator, User, Owner")]
+        [Authorize(Roles = "User, Owner")]
         // GET: Rezervacijas/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -357,6 +358,22 @@ namespace RentACar.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+            EditReservation reservation = new EditReservation();
+            Rezervacija rez = db.Rezervacii.Include(m => m.Korisnik).Include(m => m.Vozilo).Where(m => m.RezervacijaId == id).First(); ;
+            if (rez == null)
+            {
+                return HttpNotFound();
+            }
+            reservation.RezervacijaId = rez.RezervacijaId;
+
+            
+            reservation.DateFrom = rez.DateFrom.ToString("dd/MM/yyyy");
+            reservation.DateTo = rez.DateTo.ToString("dd/MM/yyyy");
+            ViewBag.Poraka = "";
+            return View(reservation);
+
+            /*
             Rezervacija rezervacija = db.Rezervacii.Include(m => m.Korisnik).Include(m => m.Vozilo).Where(m => m.RezervacijaId == id).First(); ;
             if (rezervacija == null)
             {
@@ -365,6 +382,7 @@ namespace RentACar.Controllers
             ViewBag.KorisnikId = new SelectList(db.Korisnici, "KorisnikId", "Name", rezervacija.KorisnikId);
             ViewBag.VoziloId = new SelectList(db.Vozila, "VoziloId", "ModelName", rezervacija.VoziloId);
             return View(rezervacija);
+            */
         }
 
         // POST: Rezervacijas/Edit/5
@@ -372,20 +390,128 @@ namespace RentACar.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "RezervacijaId,denoviIznajmuvanje,uspesnost,plateno,total,VoziloId,KorisnikId,DateFrom,DateTo")] Rezervacija rezervacija)
+        public ActionResult Edit([Bind(Include = "RezervacijaId,DateFrom,DateTo")] EditReservation model)
         {
-            if (ModelState.IsValid)
+            // if (ModelState.IsValid)
+            // {
+            //     db.Entry(rezervacija).State = EntityState.Modified;
+            //     db.SaveChanges();
+            //     return RedirectToAction("Index");
+            // }
+            // ViewBag.KorisnikId = new SelectList(db.Korisnici, "KorisnikId", "Name", rezervacija.KorisnikId);
+            // ViewBag.VoziloId = new SelectList(db.Vozila, "VoziloId", "ModelName", rezervacija.VoziloId);
+            //return View(rezervacija);
+
+
+
+            Rezervacija rezervacija = db.Rezervacii.Find(model.RezervacijaId);
+            // rezervacija.denoviIznajmuvanje = model.denoviIznajmuvanje;
+            string pattern = "dd/MM/yyyy";
+            DateTime.TryParseExact(model.DateFrom, pattern, null,
+                                   DateTimeStyles.None, out DateTime dateFrom);
+            DateTime.TryParseExact(model.DateTo, pattern, null,
+                                   DateTimeStyles.None, out DateTime dateTo);
+            // rezervacija.DateFrom = Convert.ToDateTime(model.DateFrom, new DateTimeFormatInfo { FullDateTimePattern = "dd/MM/yyyy" });
+            // rezervacija.DateTo = Convert.ToDateTime(model.DateTo, new DateTimeFormatInfo { FullDateTimePattern = "dd/MM/yyyy" });
+           
+            
+            string dif = (dateTo - dateFrom).TotalDays.ToString();
+            
+
+            var vozilo = db.Vozila.Find(rezervacija.VoziloId);
+            double cena = vozilo.PriceDay;
+
+            
+
+
+            if (DateTime.Compare(dateFrom, DateTime.Now.AddDays(-1)) < 0 || DateTime.Compare(dateTo, DateTime.Now) < 0)
             {
-                db.Entry(rezervacija).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                
+                ViewBag.Poraka = "Неможе да се резервира во минатото!!!";
+
+                return View(model);
             }
-            ViewBag.KorisnikId = new SelectList(db.Korisnici, "KorisnikId", "Name", rezervacija.KorisnikId);
-            ViewBag.VoziloId = new SelectList(db.Vozila, "VoziloId", "ModelName", rezervacija.VoziloId);
-            return View(rezervacija);
+
+            if (DateTime.Compare(dateFrom, dateTo) >= 0)
+            {
+                
+                ViewBag.Poraka = "Крајниот датум (Датум До) треба да биде поголем од почетниот датум (Датум Од)!!!";
+
+                return View(model);
+            }
+
+
+            var rezervacii = db.Rezervacii.Where(m => m.VoziloId == rezervacija.VoziloId);
+
+            foreach (var r in rezervacii)
+            {
+                if(r == rezervacija)
+                {
+                    continue;
+                }
+                DateTime datumOd = r.DateFrom;
+                DateTime datumDo = r.DateTo;
+
+                DateTime momentalenDatumOd = dateFrom;
+                DateTime momentalenDatumDo = dateTo;
+
+                int result1 = DateTime.Compare(datumOd, momentalenDatumOd);
+                int result2 = DateTime.Compare(datumDo, momentalenDatumOd);
+
+                if (result1 <= 0 && result2 >= 0)
+                {
+                    
+                    ViewBag.Poraka = "Веќе постои резервација за внесениот термин!!!";
+
+                    return View(model);
+                }
+
+                int result3 = DateTime.Compare(datumOd, momentalenDatumDo);
+                int result4 = DateTime.Compare(datumDo, momentalenDatumDo);
+
+                if (result3 <= 0 && result4 >= 0)
+                {
+                    
+                    ViewBag.Poraka = "Веќе постои резервација за внесениот термин!!!";
+
+                    return View(model);
+                }
+
+                int result5 = DateTime.Compare(datumOd, momentalenDatumOd);
+                int result6 = DateTime.Compare(datumDo, momentalenDatumDo);
+
+                if (result5 >= 0 && result6 <= 0)
+                {
+                   
+                    ViewBag.Poraka = "Веќе постои резервација за внесениот термин!!!";
+
+                    return View(model);
+                }
+            }
+
+
+            rezervacija.DateFrom = dateFrom;
+            rezervacija.DateTo = dateTo;
+            rezervacija.denoviIznajmuvanje = Convert.ToInt32(dif);
+            rezervacija.total = cena * rezervacija.denoviIznajmuvanje;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+
+
+
+
+
+
+
+
+
+
+
+
+
         }
 
-        [Authorize(Roles = "Administrator, User, Owner")]
+        [Authorize(Roles = "User, Owner")]
         // GET: Rezervacijas/Delete/5
         public ActionResult Delete(int? id)
         {

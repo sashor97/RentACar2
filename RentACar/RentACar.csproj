@@ -209,6 +209,7 @@
     <Compile Include="Models\AddComment.cs" />
     <Compile Include="Models\AddReservation.cs" />
     <Compile Include="Models\AddToRoleModel.cs" />
+    <Compile Include="Models\EditReservation.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Kategorija.cs" />
     <Compile Include="Models\Komentar.cs" />

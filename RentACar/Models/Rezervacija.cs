@@ -14,7 +14,7 @@ namespace RentACar.Models
 
         [Key]
         public int RezervacijaId { get; set; }
-        [Required(ErrorMessage = "Деновите на изнајмување на возилото  се задолжителни")]
+        
         [Display(Name = "Денови на изнајмување")]
         public int denoviIznajmuvanje { get; set; }
 
